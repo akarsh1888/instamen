@@ -22,6 +22,8 @@ const CollectionPreview = ({ title, items }) => {
   );
 };
 
+// Earlier without CollectionItem
+
 // {items
 //   .filter((item, index) => index < 4)
 //   .map(item => (
