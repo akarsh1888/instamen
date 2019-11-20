@@ -23,7 +23,16 @@ export const firestore = firebase.firestore();
 
 
 
-// SignInWithGoogle functionality
+
+
+
+
+
+
+
+
+
+// SignInWithGoogle functionality function
 const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({ prompt: "select_account" });
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
@@ -33,30 +42,79 @@ export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
 
 
-// export const createUserProfileDocument = async (userAuth, additionalData) => {
-//   if (!userAuth) return;
 
-//   const userRef = firestore.doc(`users/${userAuth.uid}`);
 
-//   const snapShot = await userRef.get();
 
-//   if (!snapShot.exists) {
-//     const { displayName, email } = userAuth;
-//     const createdAt = new Date();
-//     try {
-//       await userRef.set({
-//         displayName,
-//         email,
-//         createdAt,
-//         ...additionalData
-//       });
-//     } catch (error) {
-//       console.log("error creating user", error.message);
-//     }
-//   }
 
-//   return userRef;
-// };
+
+
+
+
+//Returning Object are:
+//Query Reference 
+//Query Snapshot
+
+//documentref object methods are: set, get, update, delete
+//collectionref object to add documents to collection method are: add
+//both can use .get() to get snapshot object.. whether collectn or document
+// documentref === returns documentsnapshot object
+//collectionref==== returns  querysnapshot object
+
+export const checkingOrCreatingUserDataInDb = async (userAuth, additionalData) => {
+
+    //if userAuth object is null ,just return & do nothing
+    if (!userAuth)
+    {
+        return;
+    }
+
+    //checking whether the user with that [uid] exist in db or not
+    // this line below, return a [documentref] object, because we r searching for a document
+    const userRef = firestore.doc(`users/${userAuth.uid}`);
+
+    const snapShot = await userRef.get();
+    //from documntref we get snapshot object,it represents data only, but has 
+    //..[exist] property which tells whether exist in db or not
+
+    //hence if not in db then create in db/store in db
+    if (!snapShot.exists)
+    {
+        //what things we will be creating, we destructure from [userAuth] object
+        const { displayName, email } = userAuth;
+        const createdAt = new Date();
+        
+    try
+    {
+      await userRef.set({ displayName, email, createdAt, ...additionalData });
+    }
+    catch (error)
+    {
+      console.log("error creating user", error.message);
+    }
+        
+    }
+
+    
+
+//It will return userref[documentref] object always
+  return userRef;
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -12,8 +12,11 @@ import Header from "./components/header/header.component";
 import SignInSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 
 
-// Firebase Auth
+//getting firebase [auth] Function from firebase utils
 import { auth } from "./firebase/firebase.utils";
+
+//getting user/checking/creating in db functionality  
+import { checkingOrCreatingUserDataInDb } from './firebase/firebase.utils';
 
 
 class App extends React.Component {
@@ -38,28 +41,35 @@ class App extends React.Component {
   unsubscribeFromAuth= null;
 
   
-  
   componentDidMount() {
-    // OAuth Persistent State
+
+    // OAuth Persistent State gets called & gets [userAuth] object from firebase, set the currentUser value
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      
-      // if (userAuth) {
-      //   const userRef = await createUserProfileDocument(userAuth);
+       
 
-      //   userRef.onSnapshot(snapShot => {
-      //     this.setState({
-      //       currentUser: {
-      //         id: snapShot.id,
-      //         ...snapShot.data()
-      //       }
-      //     });
+      // (createUserProfileDocument) function is fired here
+      // when we signout===[userAuth] object will be null 
 
-      //     console.log(this.state);
-      //   });
-      // }
+      if (userAuth)
+      {
+        const userRef = await checkingOrCreatingUserDataInDb(userAuth);
 
-      this.setState({ currentUser: userAuth });
+        // Now we also want userinfo in our app ,
+        //To set user data as, it should also be in there in our app
+         userRef.onSnapshot(snapShot => {
+     this.setState({ currentUser: { id: snapShot.id, ...snapShot.data() } }, () => {console.log(this.state);}  );
+          });
+      }
+
+      else
+      {
+        //equivalent as setting to null
+        this.setState({ currentUser: userAuth });
+      }
+
     });
+
+
   }
 
 

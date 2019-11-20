@@ -52,7 +52,6 @@ class SignIn extends Component {
         <span>Sign in with your email and password</span>
 
         <form onSubmit={this.handleSubmit}>
-        
           <FormInput
             name="email"
             type="email"
@@ -68,14 +67,20 @@ class SignIn extends Component {
             handleChange={this.handleChange}
             label="password"
             required
-                />
-                
+          />
+
+          <div className='button'>
           <CustomButton type="submit"> Sign in </CustomButton>
 
           {/* SignInWith Google button*/}
-          <CustomButton onClick={signInWithGoogle}> Sign in With Google </CustomButton>
+          <CustomButton onClick={signInWithGoogle} googleSignInColorProp>
+            {" "}
+            Sign in With Google{" "}
+          </CustomButton>
+  
+          </div>
+
         </form>
-            
       </div>
     );
   }
