@@ -5,6 +5,9 @@
   justify-content: space-between;
   margin-bottom: 25px;
 
+  padding-left: 60px;
+  padding-right: 100px;
+
   .logo-container {
     height: 100%;
     width: 70px;
@@ -17,6 +20,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    margin-top: 10px;
 
     .option {
       padding: 10px 15px;
