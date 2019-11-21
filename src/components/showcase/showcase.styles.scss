@@ -1,0 +1,26 @@
+// Header
+#header {
+  // Header Home
+  &-home {
+    background: url("../../assets/showcase.jpg") no-repeat center right / cover;
+    height: 87vh;
+    color: #fff;
+
+    // Header Content
+    .header-content {
+      text-align: right;
+      padding-top: 12%;
+      margin-right: 8rem;
+
+      h1 {
+        font-size: 4rem;
+        line-height: 1.2;
+      }
+
+      p {
+        font-size: 1.3rem;
+        margin-bottom: 2rem;
+      }
+    }
+  }
+}

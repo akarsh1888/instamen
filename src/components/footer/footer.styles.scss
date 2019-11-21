@@ -25,19 +25,24 @@
       padding-left: 35px;
     }
 
+
+    
     .ullist li {
       padding: 0.3rem 0;
       border-bottom: #555 dotted 1px;
       width: 100%;
+      
+      .Link {
+        color: #fff;
 
-      .Link:hover {
-        color: #c72727 !important;
+        &:hover{
+          color: #c72727 !important;
+        }
       }
     }
 
-    .Link {
-      color: #fff;
-    }
+
+
 
     .last-child {
       background: #444;
@@ -46,5 +51,23 @@
       text-align: center;
       font-size: 0.75rem;
     }
+
+
   }
 }
+
+
+
+
+
+//equivalent to saying  [&=btn]. when we have multiple class names with some change in name
+// &= it takes the value of parent element tag
+//
+// btn {
+// width:100%;
+
+// &-secondary{    
+// width: 200%;
+// }
+
+// }

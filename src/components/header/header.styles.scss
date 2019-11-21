@@ -1,30 +1,49 @@
-.header {
-  height: 70px;
-  width: 100%;
+// Main Nav
+#main-nav {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 25px;
+  padding-top: 0.3rem;
+  //background: url('../../assets/showcase.jpg') no-repeat center right / cover;
+  background-color: #333;
 
-  padding-left: 60px;
-  padding-right: 100px;
+  // Logo
+.logo {
+  width: 70px;
+  height: 70px;
+  color: #fff;
+  text-transform: uppercase;
+  margin-left: 4rem;
+}
 
-  .logo-container {
-    height: 100%;
-    width: 70px;
-    padding: 25px;
+
+  ul {
+    display: flex;
+    margin-right: 7rem;
   }
 
-  .options {
-    width: 50%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    margin-top: 10px;
+  li {
+    padding: 1rem 1.5rem;
+  }
 
-    .option {
-      padding: 10px 15px;
-      cursor: pointer;
+  .Link {
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;
+    border-bottom: 3px transparent solid;
+    padding-bottom: 0.5rem;
+    transition: border-color 0.5s;
+
+    &:hover {
+      border-color: var(--secondary-color);
+    }
+
+    &.Current {
+      border-color: var(--secondary-color);
     }
   }
 }
+
+
+
+
+
