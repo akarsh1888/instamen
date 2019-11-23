@@ -45,11 +45,11 @@ class App extends React.Component {
   
   componentDidMount() {
 
-    // OAuth Persistent State gets called & gets [userAuth] object from firebase, set the currentUser value
+    // OAuth Persistent State gets called & gets [userAuth] object from firebase, set the currentUser value to that
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
        
 
-      // (createUserProfileDocument) function is fired here
+      // (checkingOrCreatingUserDataInDb) function is fired here
       // when we signout===[userAuth] object will be null 
 
       if (userAuth)

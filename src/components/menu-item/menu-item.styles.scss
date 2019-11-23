@@ -46,10 +46,6 @@
   }
 
 
-
-
-
-
   .content {
     height: 90px;
     padding: 0 25px;
@@ -63,10 +59,10 @@
     position: absolute;
 
     .title {
-      font-weight: bold;
+      font-weight: bolder;
       margin-bottom: 6px;
       font-size: 22px;
-      color: #4a4a4a;
+      color: #333;
     }
 
     .subtitle {

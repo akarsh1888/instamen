@@ -4,9 +4,7 @@ import React from 'react';
 import './custom-button.styles.scss';
 
 const CustomButton = ({ children, googleSignInColorProp, ...otherProps }) => (
-    <button
-        className={`${googleSignInColorProp ? 'google-sign-in' : ''} custom-button`}
-        {...otherProps}>
+    <button className={`${googleSignInColorProp ? 'google-sign-in' : ''} custom-button`} {...otherProps}>
         {children}
     </button>
 );

@@ -21,6 +21,11 @@ class SignUp extends React.Component {
     
 
 
+  
+  
+  
+  
+  
 
 
 
@@ -39,9 +44,9 @@ class SignUp extends React.Component {
 
       try
       {
-      const { user } = await auth.createUserWithEmailAndPassword( email, password );
+      const { userAuth } = await auth.createUserWithEmailAndPassword( email, password );
 
-      await checkingOrCreatingUserDataInDb(user, { displayName });
+      await checkingOrCreatingUserDataInDb(userAuth, { displayName });
 
       this.setState({
         displayName: "",
@@ -58,6 +63,13 @@ class SignUp extends React.Component {
       }
       
   };
+
+
+
+
+
+
+
 
     
     
@@ -77,6 +89,15 @@ class SignUp extends React.Component {
     
     
     
+
+
+
+
+
+
+
+
+
     
     
     render() {
