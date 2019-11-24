@@ -20,30 +20,26 @@ import { auth } from "./firebase/firebase.utils";
 //getting user/checking/creating in db functionality  
 import { checkingOrCreatingUserDataInDb } from './firebase/firebase.utils';
 
+//redux
+import { connect } from 'react-redux';
+
+// user-reducer action object
+import { setCurrentUser } from "./redux/user/user.actions";
 
 class App extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      currentUser: null
-    };
-  }
-
-
-
-
-
-
-
-
-
-
+ 
 
   unsubscribeFromAuth= null;
 
+
   
+
+
+
+
   componentDidMount() {
+
+    const { setCurrentUser } = this.props;
 
     // OAuth Persistent State gets called & gets [userAuth] object from firebase, set the currentUser value to that
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
@@ -59,14 +55,14 @@ class App extends React.Component {
         // Now we also want userinfo in our app ,
         //To set user data as, it should also be in there in our app
          userRef.onSnapshot(snapShot => {
-     this.setState({ currentUser: { id: snapShot.id, ...snapShot.data() } }, () => {console.log(this.state);}  );
+         setCurrentUser({ id: snapShot.id, ...snapShot.data()  }, () => {console.log(this.state);});
           });
       }
 
       else
       {
         //equivalent as setting to null
-        this.setState({ currentUser: userAuth });
+        setCurrentUser(userAuth);
       }
 
     });
@@ -76,6 +72,11 @@ class App extends React.Component {
 
 
 
+
+
+
+
+  
 
   componentWillUnmount() {
     this.unsubscribeFromAuth();
@@ -105,7 +106,7 @@ class App extends React.Component {
         
         
   
-        <Header currentUser={this.state.currentUser} />
+        <Header />
 
 
         <Route exact path="/" component={Showcase} />
@@ -124,4 +125,9 @@ class App extends React.Component {
   }
 }
 
-export default App;
+
+const mapDispatchToProps = dispatch => ({
+  setCurrentUser: user => dispatch(setCurrentUser(user))
+});
+
+export default connect(null, mapDispatchToProps)(App);
