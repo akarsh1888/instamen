@@ -15,7 +15,14 @@ import { auth } from '../../firebase/firebase.utils';
 // Redux
 import { connect } from 'react-redux'
 
-const Header = ({currentUser}) => {
+// Cart Icon
+import CartIcon from '../cart-icon/cart-icon.component';
+
+// Cart Dropdown
+import CartDropDown from "../cart-dropdown/cart-dropdown.component";
+
+
+const Header = ({currentUser, hidden}) => {
     return (
             
         <nav id='main-nav' >
@@ -24,7 +31,8 @@ const Header = ({currentUser}) => {
                         <Logo className="logo" />
                     </Link>
 
-                    <ul>
+                    <ul> 
+                    
                         <li><Link className='Current Link' to="/">HOME</Link></li>
                         <li><Link className='Link'  to="/shop">SHOP</Link></li>
                         <li><Link className='Link' to="/">ABOUT</Link></li>
@@ -36,9 +44,15 @@ const Header = ({currentUser}) => {
                         }
 
                         <li><Link className='Link' to="/">CONTACT</Link></li>
+                        
+                        <li><CartIcon /></li> 
+                        <li> { hidden ? null : <CartDropDown /> } </li>
                     </ul>
-          
-                </nav>
+           
+        </nav>
+
+        
+        
             
 
 
@@ -48,10 +62,14 @@ const Header = ({currentUser}) => {
 
 
 
-const mapStateToProps = state => ({
-    currentUser: state.user.currentUser
+// const mapStateToProps = state => ({
+//     currentUser: state.user.currentUser,
+//     hidden: state.cart.hidden
+// });
+
+const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
+    currentUser,
+    hidden
 });
-
-
 
 export default connect(mapStateToProps)(Header) ;

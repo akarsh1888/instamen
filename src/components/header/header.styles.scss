@@ -19,6 +19,7 @@
   ul {
     display: flex;
     margin-right: 7rem;
+
   }
 
   li {
@@ -32,6 +33,7 @@
     border-bottom: 3px transparent solid;
     padding-bottom: 0.5rem;
     transition: border-color 0.5s;
+
 
     &:hover {
       border-color: var(--secondary-color);
