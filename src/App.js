@@ -1,6 +1,6 @@
 import React from "react";
 // Routing
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 
 // Styling
 import "./App.css";
@@ -76,7 +76,7 @@ class App extends React.Component {
 
 
 
-  
+
 
   componentWillUnmount() {
     this.unsubscribeFromAuth();
@@ -115,7 +115,11 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/shop" component={ShopPage} />
-          <Route path="/signin" component={SignInSignUpPage} />
+
+          {/* if currentUser is null, then only render otherwise redirect*/} 
+          <Route exact path="/signin" render={ () => this.props.currentUser ?
+            (<Redirect to='/' />) : (<SignInSignUpPage />)  }/>
+                     
         </Switch>
 
         <Footer />
@@ -126,8 +130,25 @@ class App extends React.Component {
 }
 
 
+
+
+
+
+
+
+
+
+
 const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
 });
 
-export default connect(null, mapDispatchToProps)(App);
+
+
+const mapStateToProps = rootreducerstate => ({
+  currentUser: rootreducerstate.user.currentUser
+});
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
