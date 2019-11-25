@@ -12,14 +12,14 @@ const CollectionPreview = ({ title, items }) => {
       <h1 className="title">{title.toUpperCase()}</h1>
 
       { /*  Earlier we were destructuring all props of one object one by one than passing
-      it to the <COLLECTION ITEM>
+      it to the <COLLECTION ITEM> but ,now it wants whole object as a whole
       
       <div className="preview">
         {items.filter((item, index) => index < 4).map(({ id, ...allPropsOfItemsArrayOneObject }) => (
             <CollectionItem key={id} {...allPropsOfItemsArrayOneObject} />
           ))}
         </div>
-        
+
        */}
 
 

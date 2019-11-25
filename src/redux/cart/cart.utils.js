@@ -1,16 +1,17 @@
-export const addingbutbasedonQuantity = (cartItems, cartItemToAdd) =>
+export const addingbutbasedonQuantity = (cartItemsArrayofObjects, cartItemToAdd) =>
 {
-    const existingCartItem = cartItems.find(
+    const existingCartItem = cartItemsArrayofObjects.find(
         cartItem => cartItem.id === cartItemToAdd.id
     );
 
     if (existingCartItem) {
-        return cartItems.map(cartItem =>
-            cartItem.id === cartItemToAdd.id
-                ? { ...cartItem, quantity: cartItem.quantity + 1 }
-                : cartItem
+
+        // .map function returns an array
+        return cartItemsArrayofObjects.map(cartItem =>
+            cartItem.id === cartItemToAdd.id ? { ...cartItem, quantity: cartItem.quantity + 1 }  : cartItem
         );
     }
 
-    return [...cartItems, { ...cartItemToAdd, quantity: 1 }];
+    return [...cartItemsArrayofObjects, { ...cartItemToAdd, quantity: 1 }];
 };
+
