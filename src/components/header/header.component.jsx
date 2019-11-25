@@ -67,6 +67,7 @@ const Header = ({currentUser, hidden}) => {
 //     hidden: state.cart.hidden
 // });
 
+//--------New way of writing & destructuring at the same time
 const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
     currentUser,
     hidden
