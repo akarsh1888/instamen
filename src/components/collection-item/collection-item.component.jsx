@@ -10,7 +10,7 @@ import CustomButton from "../custom-button/custom-button.component";
 import { connect } from 'react-redux';
 
 // cart-reducer action function
-import { addToCartItemsAction } from "../../redux/cart/cart.actions"; 
+import { addToCartItemsActionFunction } from "../../redux/cart/cart.actions"; 
 
 const CollectionItem = ({ item, addToCartItemsFunction }) => {
    
@@ -37,7 +37,7 @@ const CollectionItem = ({ item, addToCartItemsFunction }) => {
 
 
 const mapDispatchToProps = dispatch => ({
-  addToCartItemsFunction: item => dispatch(addToCartItemsAction(item))
+  addToCartItemsFunction: item => dispatch(addToCartItemsActionFunction(item))
 });
 
 

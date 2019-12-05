@@ -1,4 +1,4 @@
-import CartActionTypes from './cart.types';
+// import CartActionTypes from './cart.types';
 
 import { addingbutbasedonQuantity} from '../cart/cart.utils';
 
@@ -10,14 +10,14 @@ const INITIAL_STATE = {
 const cartReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         
-        case CartActionTypes.TOGGLE_CART_HIDDEN:
+        case 'TOGGLE_CART_HIDDEN':
             return {
                 ...state,
                 hidden: !state.hidden
             };
         
         
-        case 'ADD_TO_CARTITEMS':
+        case 'ADD_TO_CARTITEMS_ARRAY':
             return {
                 ...state,
                 cartItemsArray: addingbutbasedonQuantity(state.cartItemsArray, action.payload)

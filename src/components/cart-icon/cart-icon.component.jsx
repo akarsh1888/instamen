@@ -10,7 +10,7 @@ import { ReactComponent as ShoppingIcon } from '../../assets/shopping-bag.svg';
 import { connect } from 'react-redux';
 
 // cart-reducer action function
-import { toggleCartHidden } from '../../redux/cart/cart.actions';
+import { toggleCartHiddenActionFunction } from '../../redux/cart/cart.actions';
 
 // accessing state/subscribing with the help of selectors
 import { selectCartItemsQuantityCount } from "../../redux/cart/cart.selectors";
@@ -25,9 +25,9 @@ const CartIcon = ({ toggleCartHidden, quantityCount }) => (
 
 
 
-// Changing hidden state value
+// Changing [hidden] from central state value
  const mapDispatchToProps = dispatch => ({
-     toggleCartHidden: () => dispatch(toggleCartHidden())
+     toggleCartHidden: () => dispatch(toggleCartHiddenActionFunction())
  });
 
 

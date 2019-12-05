@@ -21,7 +21,15 @@ import CartIcon from '../cart-icon/cart-icon.component';
 // Cart Dropdown
 import CartDropDown from "../cart-dropdown/cart-dropdown.component";
 
+// Pass State to all selectors automatically
+import { createStructuredSelector } from "reselect";
 
+// CartHidden Selector
+import {selectCartHiddenSelector} from "../../redux/cart/cart.selectors.js"
+
+// CurrentUser Selector
+import { selectCurrentUserSelector } from '../../redux/user/user.selectors'
+    
 const Header = ({currentUser, hidden}) => {
     return (
             
@@ -67,10 +75,29 @@ const Header = ({currentUser, hidden}) => {
 //     hidden: state.cart.hidden
 // });
 
-//--------New way of writing & destructuring at the same time
-const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
-    currentUser,
-    hidden
+//--------New way of accessing central store state,ie. writing & destructuring at the same time
+// const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
+//     currentUser,
+//     hidden
+// });
+
+
+
+
+// -------But now we shouldn't access the state directly but access it using the selectors for memoziation
+
+// const mapStateToProps = (state) => ({
+//     currentUser: selectCurrentUserSelector(state),
+//     hidden: selectCartHiddenSelector(state)
+// });
+
+//----why ? createStructuredSelector automatically passes the state to each selector
+const mapStateToProps = createStructuredSelector({
+    currentUser: selectCurrentUserSelector,
+    hidden: selectCartHiddenSelector
 });
+
+
+
 
 export default connect(mapStateToProps)(Header) ;
