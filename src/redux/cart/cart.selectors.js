@@ -6,26 +6,27 @@ const selectCart = state => state.cart;
 //first parameter=array of input selectors, second para==function which takes output of array inputs selectors &
 //return output which we want out of our defined selector
 
-export const selectCartItemsArray = createSelector([selectCart], cart => cart.cartItemsArray);
+export const selectCartItemsArraySelector = createSelector([selectCart], cart => cart.cartItemsArray);
 
 
-// add the total quantity in an cartItemsArray
+// calculate the total quantity in an cartItemsArray
 export const selectCartItemsQuantityCount = createSelector(
-  [selectCartItemsArray],
+  [selectCartItemsArraySelector],
   cartItemsArray =>
            cartItemsArray.reduce( (accumalatedQuantity, cartItem) => accumalatedQuantity + cartItem.quantity,0 )
        );
 
-// retruns the [hidden] state value
+       
+// returns the [hidden] state value
 export const selectCartHiddenSelector = createSelector(
   [selectCart],
   cart => cart.hidden
 );
 
 
-
-export const selectCartTotal = createSelector(
-  [selectCartItemsArray],
+// calculate the total price in an cartItemsArray
+export const selectCartTotalPriceSelector = createSelector(
+  [selectCartItemsArraySelector],
   cartItemsArray =>
   cartItemsArray.reduce(
     (accumalatedQuantity, cartItem) =>

@@ -1,6 +1,5 @@
 export const addingbutbasedonQuantity = (cartItemsArrayofObjects, cartItemToAdd) =>
 {
-
     // if it finds any object similar with that id exist or not ,it returns true/false
 const existingCartItem = cartItemsArrayofObjects.find( cartItem => cartItem.id === cartItemToAdd.id );
 
@@ -17,3 +16,20 @@ const existingCartItem = cartItemsArrayofObjects.find( cartItem => cartItem.id =
     return [...cartItemsArrayofObjects, { ...cartItemToAdd, quantity: 1 }];
 };
 
+
+
+
+
+
+export const deletebutbasedonQuantity = (cartItemsArray, cartItemToDelete) => {
+  
+    const CartItemExist = cartItemsArray.find(cartItem => cartItem.id === cartItemToDelete.id);
+    
+    if (CartItemExist.quantity === 1) {
+        return cartItemsArray.filter(cartItem => cartItem.id !== cartItemToDelete.id)
+    }
+
+    return cartItemsArray.map(cartItem =>
+        cartItem.id === cartItemToDelete.id ? { ...cartItem, quantity: cartItem.quantity - 1 } : cartItem 
+        );
+};
