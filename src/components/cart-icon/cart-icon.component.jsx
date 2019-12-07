@@ -33,11 +33,6 @@ const CartIcon = ({ toggleCartHidden, quantityCount }) => (
 
 
 
-
-
-
-
-
 //  Calculating total quantity by using all objects onebyone from central store ie.cartItemsArray
 const mapStateToProps = state => ({
 
