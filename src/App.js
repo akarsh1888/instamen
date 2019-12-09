@@ -7,11 +7,12 @@ import "./App.css";
 
 // COMPONENTS
 import HomePage from "./pages/homepage/homepage.component";
-import ShopPage from "./pages/shop/shop.component";
 import SignInSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 import Footer from "./components/footer/footer.component";
 import Header from './components/header/header.component';
 import Showcase from './components/showcase/showcase.component';
+import ShopPage from "./pages/shop/shop.component";
+import ShopPage2 from "./pages/shop2/shop2.component";
 
 
 //getting firebase [auth] Function from firebase utils
@@ -34,6 +35,8 @@ import { selectCurrentUserSelector } from "./redux/user/user.selectors";
 
 // CheckoutPage
 import CheckoutPage from "./pages/checkout/checkout.component";
+
+
 
 
 class App extends React.Component {
@@ -107,7 +110,10 @@ class App extends React.Component {
 
         <Switch>
           <Route exact path="/" component={HomePage} />
+          
           <Route path="/shop" component={ShopPage} />
+
+          <Route path="/shop2" component={ShopPage2} />
 
           {/* if currentUser is null, then only render otherwise redirect*/} 
           <Route exact path="/signin" render={ () => this.props.currentUser ?
