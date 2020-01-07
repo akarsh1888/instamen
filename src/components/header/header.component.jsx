@@ -91,7 +91,7 @@ const Header = ({currentUser, hidden}) => {
 //     hidden: selectCartHiddenSelector(state)
 // });
 
-//----why ? createStructuredSelector automatically passes the state to each selector
+//----why createStructuredSelector ? it automatically passes the state to each selector
 const mapStateToProps = createStructuredSelector({
     currentUser: selectCurrentUserSelector,
     hidden: selectCartHiddenSelector

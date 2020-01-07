@@ -6,25 +6,31 @@ import CustomButton from '../custom-button/custom-button.component';
 //Styles
 import './cart-dropdown.styles.scss';
 
-// CartItemsindropdown
-import CartItemsDropDown from '../cart-items-dropdown/cart-items-dropdown.component';
-
 // Connect to Redux Central Store
 import { connect } from "react-redux";
+
+// WithRouter to communicate from url
+import { withRouter } from "react-router-dom";
+
+// CartItemsindropdown
+import CartItemsDropDown from '../cart-items-dropdown/cart-items-dropdown.component';
 
 // CartItemsArraySelector
 import { selectCartItemsArraySelector } from "../../redux/cart/cart.selectors";
 
-// WithRouter to communicate from url
-import { withRouter } from "react-router-dom";
 
 // toggleCartHiddenActionFunction
 import { toggleCartHiddenActionFunction } from "../../redux/cart/cart.actions";
 
 
+
+
+
+
 const CartDropDown = ({ cartItemsArrayFromCentralStore, history, toggleCartHiddenReduxCall}) => (
     <div className='cart-dropdown'>
         <div className='cart-items'>
+            
             {   // based on array length we will show message or the items inside it
                 cartItemsArrayFromCentralStore.length ?
                     (
@@ -34,7 +40,9 @@ const CartDropDown = ({ cartItemsArrayFromCentralStore, history, toggleCartHidde
                     :   
                     <span className="empty-message">Your Cart is Empty</span>    
             }
+
         </div>
+
         <CustomButton onClick={() =>
         {
             history.push('/checkout');
@@ -42,6 +50,7 @@ const CartDropDown = ({ cartItemsArrayFromCentralStore, history, toggleCartHidde
         }}>
             GO TO CHECKOUT
         </CustomButton>
+
     </div>
 );
 

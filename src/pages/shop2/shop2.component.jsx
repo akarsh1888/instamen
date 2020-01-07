@@ -9,7 +9,9 @@ import { Route } from 'react-router-dom';
 const ShopPage2 = ({ match }) => {
     return (
         <div className='shop-page'>
-            
+            {
+    // since [shop2] component route is defined in app.js, it gets the [match] object
+            }
             <Route path={`${match.path}/:collectionId`} component={CategoryPage} />
             <Route exact path={`${match.path}`} component={CategoryOverview} />
             

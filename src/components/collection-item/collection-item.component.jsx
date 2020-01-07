@@ -12,6 +12,11 @@ import { connect } from 'react-redux';
 // cart-reducer action function
 import { addToCartItemsActionFunction } from "../../redux/cart/cart.actions"; 
 
+
+
+
+
+
 const CollectionItem = ({ item, addToCartItemsFunction }) => {
    
   const { name, price, imageUrl } = item;
@@ -36,9 +41,13 @@ const CollectionItem = ({ item, addToCartItemsFunction }) => {
 
 
 
+
+
 const mapDispatchToProps = dispatch => ({
   addToCartItemsFunction: item => dispatch(addToCartItemsActionFunction(item))
 });
+
+
 
 
 

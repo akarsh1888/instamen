@@ -38,6 +38,8 @@ const INTITIAL_STATE = {
 
 const directoryMenuReducer = (state = INTITIAL_STATE, action) => {
     switch (action.type) {
+
+        
         default:
             return state;
     }

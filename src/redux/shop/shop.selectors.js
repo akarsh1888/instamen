@@ -8,7 +8,6 @@ export const selectShopCollectionsSelector = createSelector(
     shop => shop.collections
     );
     
-
 // Earlier when we have to access selectedcollection
 
     // const COLLECTION_ID_MAP = {
@@ -26,3 +25,14 @@ export const selectParticularCollectionSelector = collectionUrlParam =>
             // collections.find( collection => collection.id === COLLECTION_ID_MAP[collectionUrlParam] ) 
             collections[collectionUrlParam]
     );
+
+
+
+
+
+
+// converting our collection objectsofobjects into array of values only
+export const selectCollectionsAsArrayOfValuesSelector = createSelector(
+    [selectShopCollectionsSelector],
+    collections => Object.keys(collections).map(key => collections[key])
+);

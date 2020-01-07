@@ -259,6 +259,8 @@ const shopReducer = (state = INITIAL_STATE, action) => {
 
     //since we r not modifying state, hence there is no need of dispatch action type case
     switch (action.type) {
+
+        
         default:
             return state;
     }

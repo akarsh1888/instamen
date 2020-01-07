@@ -1,8 +1,8 @@
 // import CartActionTypes from './cart.types';
 
-import { addingbutbasedonQuantity } from '../cart/cart.utils';
+import { addingbutbasedonQuantityUtility } from '../cart/cart.utils';
 
-import { deletebutbasedonQuantity } from '../cart/cart.utils';
+import { deletebutbasedonQuantityUtility } from '../cart/cart.utils';
 
 
 const INITIAL_STATE = {
@@ -24,7 +24,7 @@ const cartReducer = (state = INITIAL_STATE, action) => {
         case 'ADD_TO_CARTITEMS_ARRAY':
             return {
                 ...state,
-                cartItemsArray: addingbutbasedonQuantity(state.cartItemsArray, action.payload)
+                cartItemsArray: addingbutbasedonQuantityUtility(state.cartItemsArray, action.payload)
             };
         
         
@@ -38,7 +38,7 @@ const cartReducer = (state = INITIAL_STATE, action) => {
         case 'DELETE_QUANTITY_CARTITEMS_ARRAY':
             return {
                 ...state,
-                cartItemsArray: deletebutbasedonQuantity(state.cartItemsArray, action.payload)
+                cartItemsArray: deletebutbasedonQuantityUtility(state.cartItemsArray, action.payload)
             }
         
         

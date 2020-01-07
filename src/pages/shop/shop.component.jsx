@@ -13,15 +13,24 @@ import { connect } from "react-redux";
 import { selectShopCollectionsSelector } from "../../redux/shop/shop.selectors";
 
 
+
+
+
+
+
 const ShopPage = ({ collections }) => {
   // converting objects of objects into array of values
 
   const values = Object.values(collections);
   return (
     <div className="shop-page">
+      
       {values.map(({ id, ...otherCollectionProps }) => (
-      <CollectionPreview key={id} {...otherCollectionProps} />
+
+        <CollectionPreview key={id} {...otherCollectionProps} />
+        
       ))}
+      
     </div>
   )
 };   

@@ -7,21 +7,34 @@ import CollectionItem from "../../components/collection-item/collection-item.com
 import { selectParticularCollectionSelector } from '../../redux/shop/shop.selectors';
 
 
+
+
+
 const CategoryPage = ({ particularCollection}) => {
 
     const { title, items } = particularCollection;
+
+
     return (
-        <div className='category-page'>
+        <div className='category-page'> 
             <h2 className='title'>{title}</h2>
+
             <div className='items'>
                 {items.map(item => (
                     <CollectionItem key={item.id} item={item} />
                 ))}
             </div>
+
         </div>
     );
 };
 
+
+
+
+
+
+// based on the match object, it takes the data from url and fetches from the root reducer state
 const mapStateToProps = (state, ownProps) => ({
     particularCollection: selectParticularCollectionSelector(ownProps.match.params.collectionId)(state)
 });
