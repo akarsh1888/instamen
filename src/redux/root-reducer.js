@@ -13,27 +13,31 @@ import directoryMenuReducer from "./directory/directory.reducers";
 import shopReducer from './shop/shop.reducer';
 
 
-// // redux-persist
-//import { persistReducer } from 'redux-persist';
+// redux-persist reducer
+import { persistReducer } from 'redux-persist';
 
-// // redux-persist library for local storage
-// import storage from 'redux-persist/lib/storage';
-
-
-// const persistConfig = {
-//   key: "root",
-//   storage,
-//     whitelist: ['cart']
-// };
+// redux-persist library for [local storage] ..ie different syntax for [session storage]
+import storage from 'redux-persist/lib/storage';
 
 
 
-export default combineReducers({
+
+const persistConfig = {
+  key: "root",
+  storage,
+  whitelist: ['cart']
+};
+
+
+
+
+const rootReducer = combineReducers({
   user: userReducer,
   cart: cartReducer,
   directory: directoryMenuReducer,
   shop: shopReducer
 });
 
-// export default persistReducer(persistConfig, rootReducer);
+
+export default persistReducer(persistConfig, rootReducer);
 

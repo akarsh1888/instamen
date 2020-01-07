@@ -4,7 +4,7 @@ import logger from 'redux-logger';
 import rootReducer from './root-reducer';
 
 // persistStore function from reduxpersist library
-//import { persistStore } from 'redux-persist';
+import { persistStore } from 'redux-persist';
 
 import thunk from 'redux-thunk';
 //import ReduxPromise from 'redux-promise';
@@ -23,15 +23,10 @@ const middlewares = [logger,thunk];
 // redux browser extension
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(...middlewares)));
+export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(...middlewares)));
 
 
+//for persisting the store
+export const persistor = persistStore(store);
 
 
-
-
-export default store;
-
-//export const persistor = persistStore(store);
-
-//export default { store, persistStore };
