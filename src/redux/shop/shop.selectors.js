@@ -18,6 +18,8 @@ export const selectShopCollectionsSelector = createSelector(
     //     mens: 5
     // };
 
+
+
 export const selectParticularCollectionSelector = collectionUrlParam =>
     createSelector(
         [selectShopCollectionsSelector],
@@ -30,7 +32,7 @@ export const selectParticularCollectionSelector = collectionUrlParam =>
 
 
 
-
+//-----OPTIONAL FOR LEARNING
 // converting our collection objectsofobjects into array of values only
 export const selectCollectionsAsArrayOfValuesSelector = createSelector(
     [selectShopCollectionsSelector],
