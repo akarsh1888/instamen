@@ -88,7 +88,8 @@ class App extends React.Component {
       }
 
       //-----calling this function one time which will store our shop data in firebase nosql db without manually
-      //addCollectionAndDocuments('collection', collectionsAsArray.map( ({ title, items }) => ({title, items})  ));
+      // addCollectionAndDocuments('collection', collectionsAsArray.map( 
+      // ({ title, items }) => ({ title, items })  ));
 
       
     });
