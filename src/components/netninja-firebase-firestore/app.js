@@ -14,28 +14,81 @@ class App extends React.Component {
         };
     }
 
+
+
+
+
+
+
+
     
     //.where('name', '==', 'akarsh')
-  componentDidMount() {
-      db.collection("cafes")
-      .where('city', '==', 'lko')
-      .orderBy('name')
-      .get()
-      .then(collctnsnapshotObj => {
-          collctnsnapshotObj.docs.forEach(docsnapshotObj => {
-              
-              const uid = docsnapshotObj.id;
-              const name = docsnapshotObj.data().name;
-              const city = docsnapshotObj.data().city;
+    componentDidMount() {
+      
 
-              this.setState((prevState) => ({
-                  data: [...prevState.data, {name,city,uid}],
+//       db.collection("cafes")
+//       .where('city', '==', 'lko')
+//       .orderBy('name')
+//       .get()
+//       .then(collctnsnapshotObj => {
+//           collctnsnapshotObj.docs.forEach(docsnapshotObj => {
+              
+//               const uid = docsnapshotObj.id;
+//               const name = docsnapshotObj.data().name;
+//               const city = docsnapshotObj.data().city;
+
+//               this.setState((prevState) => ({
+//                   data: [...prevState.data, {name,city,uid}],
                   
-                }) )
-            });
-        });
+//                 }) )
+//             });
+//         });
         
+      
+        // real time listener ..this fires whenever collection is updated
+        db.collection('cafes')
+            .orderBy('name')
+            .onSnapshot(collctnsnapshotObj => {
+            let arrayofdocsObj = collctnsnapshotObj.docChanges();
+                //console.log(arrayofdocsObj);
+
+                arrayofdocsObj.forEach((docsObj) => {
+                    //each docmntsnapshotobj is printed
+                    console.log(docsObj.doc.data());
+
+                    if (docsObj.type === 'added') {
+
+                        const id = docsObj.doc.id;
+                        const name = docsObj.doc.data().name;
+                        const city = docsObj.doc.data().city;
+
+                        this.setState((prevState) => ({
+                            data: [...prevState.data, { name, city, id }]
+                        }))
+                    }
+
+                    else if (docsObj.type === 'removed') {
+
+
+                        this.setState((prevState) => ({
+                            data: prevState.data.filter(obj => obj.id !== docsObj.doc.id)
+                        }))
+                     }
+                    
+                })
+            
+        });
+
+
+
     }
+
+
+
+
+
+
+
     
 
 
@@ -55,13 +108,22 @@ class App extends React.Component {
 
 
 
+
+
+
+
     crossClick = (event) => {
-        const uid = event.target.getAttribute('uid');
-        db.collection('cafes').doc(uid).delete();
+        const id = event.target.getAttribute('id');
+        db.collection('cafes').doc(id).delete();
     }
     
 
     
+
+
+
+
+
 
   render() {
 
@@ -79,11 +141,11 @@ class App extends React.Component {
 
                 <ul id="cafe-list">
                 {this.state.data.map((dataobj) => (
-                    <li key={dataobj.uid}>
+                    <li key={dataobj.id}>
                     <span>{dataobj.name}</span>
                     <span>{dataobj.city}</span>
                     
-                    <span onClick={this.crossClick} uid={dataobj.uid} className='cross' role="img" aria-label="donut">
+                    <span onClick={this.crossClick} id={dataobj.id} className='cross' role="img" aria-label="donut">
                             &#10060;
                     </span>
                     </li>))
