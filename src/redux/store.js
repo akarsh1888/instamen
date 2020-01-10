@@ -1,4 +1,5 @@
 // middleware for logging all information before/after action function
+// eslint-disable-next-line
 import logger from 'redux-logger';
 
 import rootReducer from './root-reducer';
@@ -18,7 +19,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 
 
 // in future we can expand the array & put any other middleware library/functionality
-const middlewares = [logger,thunk];
+const middlewares = [thunk];
 
 // redux browser extension
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
