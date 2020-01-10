@@ -11,7 +11,7 @@ import SignInSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.co
 import Footer from "./components/footer/footer.component";
 import Header from './components/header/header.component';
 import Showcase from './components/showcase/showcase.component';
-import ShopPage from "./pages/shop/shop.component";
+//import ShopPage from "./pages/shop/shop.component";
 import ShopPage2 from "./pages/shop2/shop2.component";
 
 
@@ -59,9 +59,10 @@ class App extends React.Component {
 
   componentDidMount() {
 
-    const { setCurrentUser } = this.props;
+    const { setCurrentUserActionFunction } = this.props;
 
-    // OAuth Persistent State gets called & gets [userAuth] object from firebase, set the currentUser value to that
+    // OAuth Persistent State gets called & gets [userAuth] object from firebase,
+    // set the currentUser value to that
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
        
 
@@ -75,23 +76,21 @@ class App extends React.Component {
         // Now we also want userinfo in our app ,
         //To set user data as, it should also be in there in our app
          userRef.onSnapshot(snapShot => {
-         setCurrentUser({ id: snapShot.id, ...snapShot.data()  }, () => {console.log(this.state);});
+           setCurrentUserActionFunction({ id: snapShot.id, ...snapShot.data() },
+             () => { console.log(this.state); });
           });
       }
 
       else
       {
         //equivalent as setting to null
-        setCurrentUser(userAuth);
-
-
+        setCurrentUserActionFunction(userAuth);
       }
 
       //-----calling this function one time which will store our shop data in firebase nosql db without manually
       // addCollectionAndDocuments('collection', collectionsAsArray.map( 
       // ({ title, items }) => ({ title, items })  ));
 
-      
     });
     
 
@@ -110,6 +109,10 @@ class App extends React.Component {
   }
 
 
+
+
+
+
   render() {
     return (
       <div>
@@ -121,10 +124,8 @@ class App extends React.Component {
 
         <Switch>
           <Route exact path="/" component={HomePage} />
-          
-          <Route path="/shop" component={ShopPage} />
 
-          <Route path="/shop2" component={ShopPage2} />
+          <Route path="/shop" component={ShopPage2} />
 
           {/* if currentUser is null, then render [component] otherwise redirect*/} 
           <Route exact path="/signin" render={ () => this.props.currentUser ?
@@ -139,14 +140,24 @@ class App extends React.Component {
       </div>
     );
   }
+
+
+
+
 }
 
 
 
 
 
+
+
+
+
+
+
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
+  setCurrentUserActionFunction: user => dispatch(setCurrentUser(user))
 });
 
 
@@ -167,6 +178,8 @@ const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUserSelector,
   collectionsAsArray: selectCollectionsAsArrayOfValuesSelector
 });
+
+
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -10,18 +10,37 @@ import { selectShopCollectionsSelector } from '../../redux/shop/shop.selectors';
 
 
 
+
+
+
+
+
+
+
+
 const CategoryOverview = ({ collections }) => {
 
-    const values = Object.values(collections);
+    const values = collections ? Object.values(collections) : null ;
     
     return (
-            <div className="category-overview">
-                {values.map(({ id, ...otherCollectionProps }) => (
+        <div className="category-overview">
+        {
+            values ? values.map(({ id, ...otherCollectionProps }) => (
                 <CollectionPreview key={id} {...otherCollectionProps} />
-            ))}
+            )) :
+                null
+        }
             </div>
     );
 };
+
+
+
+
+
+
+
+
 
 
 const mapStateToProps = state => ({

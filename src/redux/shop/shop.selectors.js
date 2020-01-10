@@ -25,16 +25,15 @@ export const selectParticularCollectionSelector = collectionUrlParam =>
         [selectShopCollectionsSelector],
         collections =>
             // collections.find( collection => collection.id === COLLECTION_ID_MAP[collectionUrlParam] ) 
-            collections[collectionUrlParam]
+            (collections ? collections[collectionUrlParam] : null)
     );
 
 
 
-
-
-//-----OPTIONAL FOR LEARNING
+    
+//----one time usage for storing shop data in the firebase
 // converting our collection objectsofobjects into array of values only
 export const selectCollectionsAsArrayOfValuesSelector = createSelector(
     [selectShopCollectionsSelector],
-    collections => Object.keys(collections).map(key => collections[key])
+    collections => collections ? ( Object.keys(collections).map(key => collections[key]) ) : []
 );

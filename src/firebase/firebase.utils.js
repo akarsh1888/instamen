@@ -53,26 +53,27 @@ export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
 /*
 ----Returning Object are:
-Query Reference    eg. firestore.doc/collection('user/userId')
+[Query Reference] objects based on type of query    eg. firestore.doc/collection('user/userId')
 
 // [documentRef] object methods are: set(), get(), update(), delete()
 // [collectionRef] object can be used to add [documents] to the [collection] using method : add()
 
-// both can use .get() to get snapshot object.. whether collectn or document
+// both can use .get() to get snapshot object...whether collectnSnapshot or documentSnapshot
 
 // [documentRef] === returns [documentSnapshot] object
-The [documentSnapshot] object allows us to check if a document exists at this query using the [.exist()] property
-if that data exist it can be accessed using [.data()] mehtod
-We can also get the actual properties on the object by calling the [.data()] method, which returns us a [JSON]
-object of the document.
+The [documentSnapshot] object allows us to check if a document exists at this query using the [.exist()] 
+property if that data exist it can be accessed using [.data()] mehtod
+We can also get the actual data of documents on the object by calling the [.data()] method, which returns us a 
+[JSON] object of the document.
 
 
  eg. firestore.collection('user')
-// [collectionRef]==== returns [querySnapshot] object
-The [querySnapshot] object can be used to check if there r any documents in the collection by calling [.empty()] property
+// [collectionRef]==== returns [querySnapshot/collectionSnapshot] object
+The [querySnapshotquerySnapshot/collectionSnapshot] object can be used to check if there r 
+any documents in the collection by calling [.empty()] property
 
-We can get all the documents in the collection by calling the [.docs] property.It returns an array of our documents
-as [documentSnapshot] objects.
+We can get all the documents in the collection by calling the [.docs] property.It returns an array of our 
+documents as [documentSnapshot] objects.
 
 
 */
@@ -94,7 +95,7 @@ export const checkingOrCreatingUserDataInDb = async (userAuth, additionalData) =
   const collectionSnapshot = collectionRef.get();
 
   //---we will print the array of each document data inside that collection
-  console.log({ collection: collectionSnapshot.docs.map( docSnapshot => docSnapshot.data()) } );
+  console.log(   { collection: collectionSnapshot.docs.map( docSnapshot => docSnapshot.data()) }    );
      
   */
   
@@ -102,11 +103,11 @@ export const checkingOrCreatingUserDataInDb = async (userAuth, additionalData) =
   
     //checking whether the user with that [uid] exist in db or not
     // this line below, return a [documentref] object, because we r searching for a document
-    const userRef = firestore.doc(`users/${userAuth.uid}`);
+    const userRefObject = firestore.doc(`users/${userAuth.uid}`);
 
     //from documntref we get snapshot object,it represents data only, but has 
     //..[exist] property which tells whether exist in db or not
-    const snapShot = await userRef.get();
+    const snapShot = await userRefObject.get();
 
     //hence if not in db then create in db/store in db
     if (!snapShot.exists)
@@ -114,23 +115,20 @@ export const checkingOrCreatingUserDataInDb = async (userAuth, additionalData) =
         //what things we will be creating, we destructure from [userAuth] object
         const { displayName, email } = userAuth;
         const createdAt = new Date();
-        
     try
-    {
-      // asking to create a document in db with these details
-      await userRef.set({ displayName, email, createdAt, ...additionalData });
+    {// asking to create a document in db with these details
+    await userRefObject.set({ displayName, email, createdAt, ...additionalData });
     }
+      
     catch (error)
-    {
-      console.log("error creating user", error.message);
-    }
+    {  console.log("error creating user", error.message);  }
         
     }
 
     
 
-//It will return userref[documentref] object always
-  return userRef;
+//It will return userrefObject[documentref] object always
+  return userRefObject;
   };
 
 
@@ -143,10 +141,21 @@ export const checkingOrCreatingUserDataInDb = async (userAuth, additionalData) =
 
 
 
+
+
+
+
+  
+
+
+
+
+  
+
 /*
 
-// for one time usage, function for storing shopdata into firebase nosql db
-   For storing shop data into firebase nosql db without manually typing
+//---- for one time usage, function for storing shopdata into firebase nosql db
+ //----  For storing shop data into firebase nosql db without manually typing
 
 export const addCollectionAndDocuments = async (collectionKey, collectionsAsArrayValues) => {
 
@@ -168,6 +177,51 @@ export const addCollectionAndDocuments = async (collectionKey, collectionsAsArra
 
 
 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+//---shop data from firebase into single objects of objects pattern
+//--fetches each docmnt data + converts all into a single objects of objects with key pattern 
+
+export const fetchConvertFirebaseShopDataIntoSingleObjectPattern = (collectionSnapshotObj) => {
+
+  
+  const finalCollctnArrayofObjectWithoutKeys = collectionSnapshotObj.docs.map(documentSnapshotObject => {
+    
+    const { title, items } = documentSnapshotObject.data();
+
+    return {
+      routeName: encodeURI(title.toLowerCase()),
+      id: documentSnapshotObject.id,
+      title,
+      items
+    };
+  });
+  
+  
+//convert it from a single array into a single object
+//return the object of objects with the added [keys] to each object
+  return finalCollctnArrayofObjectWithoutKeys.reduce((accumulator, collection) => {
+    accumulator[collection.title.toLowerCase()] = collection;
+    return accumulator;
+  }, {});
+
+
+
+
+};
+
+
 
 
 

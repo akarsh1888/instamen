@@ -1,5 +1,5 @@
-const INITIAL_STATE = {
-    collections: {
+// eslint-disable-next-line
+const DATA = {
         
         hats: {
             id: 1,
@@ -62,7 +62,7 @@ const INITIAL_STATE = {
                 }
             ]
         },
-        sneakers:{
+        sneakers: {
             id: 2,
             title: 'Sneakers',
             routeName: 'sneakers',
@@ -117,7 +117,7 @@ const INITIAL_STATE = {
                 }
             ]
         },
-        jackets:{
+        jackets: {
             id: 3,
             title: 'Jackets',
             routeName: 'jackets',
@@ -154,7 +154,7 @@ const INITIAL_STATE = {
                 }
             ]
         },
-        womens:{
+        womens: {
             id: 4,
             title: 'Womens',
             routeName: 'womens',
@@ -203,7 +203,7 @@ const INITIAL_STATE = {
                 }
             ]
         },
-        mens:{
+        mens: {
             id: 5,
             title: 'Mens',
             routeName: 'mens',
@@ -246,12 +246,13 @@ const INITIAL_STATE = {
                 }
             ]
         }
-    }
 };
 
 
 
-
+const INITIAL_STATE = {
+    collections: null
+};
 
 
 
@@ -260,10 +261,20 @@ const shopReducer = (state = INITIAL_STATE, action) => {
     //since we r not modifying state, hence there is no need of dispatch action type case
     switch (action.type) {
 
+        case 'ADD_SHOPDATA_FROM_FIREBASE_TO_REDUCER':
+            return {
+                ...state,
+                collections: action.payload
+            };
+
         
         default:
             return state;
     }
+
 };
+
+
+
 
 export default shopReducer;

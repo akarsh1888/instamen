@@ -21,15 +21,17 @@ import { selectShopCollectionsSelector } from "../../redux/shop/shop.selectors";
 const ShopPage = ({ collections }) => {
   // converting objects of objects into array of values
 
-  const values = Object.values(collections);
+  const values = collections ? Object.values(collections) : null;
+
   return (
     <div className="shop-page">
       
-      {values.map(({ id, ...otherCollectionProps }) => (
+      {values ? values.map(({ id, ...otherCollectionProps }) => (
 
         <CollectionPreview key={id} {...otherCollectionProps} />
         
-      ))}
+      )) : null
+    }
       
     </div>
   )
