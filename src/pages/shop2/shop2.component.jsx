@@ -51,18 +51,22 @@ const { shopDataFromFirebaseToReducerAction } = this.props;
 // below functn will receive [collctnSnapshot object] ..with [docs] array of docmnt snapshot objects
 //of all docmnts inside a collection
 this.unsubscribeFromSnapshot = collectionRefObject.onSnapshot(async collectionSnapshotObj => {
+    
 const singleObjectCollection = await fetchConvertFirebaseShopDataIntoSingleObjectPattern(collectionSnapshotObj);
         
     
 // dispatching converted collection into the reducer
-    shopDataFromFirebaseToReducerAction(singleObjectCollection);
+shopDataFromFirebaseToReducerAction(singleObjectCollection);
         
 //after only reducer is filled with data from firebase, then only we will show components
-        this.setState({ loading: false });
+this.setState({ loading: false });
 });
         
-        
+   
+//---*** WITHOUT onSnapshot realtime listener feature
+//collectionRefObject.get().then(async collectionSnapshotObj => { **** same above callback function code)    
 
+       
 }//compnt did mount end
 
 

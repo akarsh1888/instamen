@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './components/netninja-firebase-firestore/app';
+import App from './App';
 
 // Router
 import { BrowserRouter } from 'react-router-dom';
