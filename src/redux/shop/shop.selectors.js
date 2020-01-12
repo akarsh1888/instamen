@@ -20,8 +20,7 @@ export const selectShopCollectionsSelector = createSelector(
 
 
 
-export const selectParticularCollectionSelector = collectionUrlParam =>
-    createSelector(
+export const selectParticularCollectionSelector = (collectionUrlParam) => createSelector(
         [selectShopCollectionsSelector],
         collections =>
             // collections.find( collection => collection.id === COLLECTION_ID_MAP[collectionUrlParam] ) 
@@ -37,3 +36,19 @@ export const selectCollectionsAsArrayOfValuesSelector = createSelector(
     [selectShopCollectionsSelector],
     collections => collections ? ( Object.keys(collections).map(key => collections[key]) ) : []
 );
+
+
+
+
+export const selectIsLoadingSelector = createSelector(
+    [shop],
+    shop => shop.isLoading
+);
+
+
+
+
+// export const selectIsCollectionsLoaded = createSelector(
+//     [shop],
+//     shop => !!shop.collections
+// );

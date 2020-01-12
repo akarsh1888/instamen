@@ -251,7 +251,9 @@ const DATA = {
 
 
 const INITIAL_STATE = {
-    collections: null
+    collections: null,
+    isLoading: true,
+    errorMessage: undefined
 };
 
 
@@ -261,12 +263,24 @@ const shopReducer = (state = INITIAL_STATE, action) => {
     //since we r not modifying state, hence there is no need of dispatch action type case
     switch (action.type) {
 
-        case 'ADD_SHOPDATA_FROM_FIREBASE_TO_REDUCER':
+        // case 'FETCH_SHOPDATA_FROM_FIREBASE_START':
+        //     return {
+        //         ...state,
+        //         isLoading: true
+        //     };
+
+        case 'FETCH_SHOPDATA_FROM_FIREBASE_SUCCESS':
             return {
                 ...state,
+                isLoading: false,
                 collections: action.payload
             };
 
+        case 'FETCH_SHOPDATA_FROM_FIREBASE_FAILED':
+            return {
+                ...state,
+                errorMessage: action.payload
+            };
         
         default:
             return state;

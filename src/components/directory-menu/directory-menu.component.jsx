@@ -20,7 +20,9 @@ const DirectoryMenu = ({ sections }) => (
         );
 
 
-const mapStateToProps = (state) => ({ sections: selectDirectorySectionsSelector(state) });
+const mapStateToProps = (state) => ({
+  sections: selectDirectorySectionsSelector(state)
+});
 
 
 export default connect(mapStateToProps)(DirectoryMenu);

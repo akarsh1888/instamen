@@ -1,15 +1,17 @@
 import React from 'react';
 
+import { fetchShopDataFromFirebaseAsyncAction } from "../../redux/shop/shop.actions";
+
+import { selectIsLoadingSelector } from "../../redux/shop/shop.selectors";
+
 import CategoryOverview from "../../components/category-overview/category-overview.component";
 import CategoryPage from '../../pages/category/category.component'
 
 import { Route } from 'react-router-dom';
 
-import { firestore, fetchConvertFirebaseShopDataIntoSingleObjectPattern } from "../../firebase/firebase.utils";
 
 import { connect } from "react-redux";
 
-import { shopDataFromFirebaseToReducerAction} from "../../redux/shop/shop.actions";
 
 import WithSpinner from "../../components/with-spinner/with-spinner.component";
 
@@ -21,53 +23,18 @@ const CategoryPageWithSpinner = WithSpinner(CategoryPage);
 
 
 
+
 class ShopPage2 extends React.Component {
 
 
 
-    state = {
-        loading: true
-    };
 
 
-
-
-
-
-
-
-
-
-    unsubscribeFromSnapshot = null;
-
-   componentDidMount()  {
-    
-// get collectionreference object
-const collectionRefObject = firestore.collection('collection');
-    
-const { shopDataFromFirebaseToReducerAction } = this.props;
-    
-    
-// below functn will receive [collctnSnapshot object] ..with [docs] array of docmnt snapshot objects
-//of all docmnts inside a collection
-this.unsubscribeFromSnapshot = collectionRefObject.onSnapshot(async collectionSnapshotObj => {
-    
-const singleObjectCollection = await fetchConvertFirebaseShopDataIntoSingleObjectPattern(collectionSnapshotObj);
-        
-    
-// dispatching converted collection into the reducer
-shopDataFromFirebaseToReducerAction(singleObjectCollection);
-        
-//after only reducer is filled with data from firebase, then only we will show components
-this.setState({ loading: false });
-});
-        
-   
-//---*** WITHOUT onSnapshot realtime listener feature
-//collectionRefObject.get().then(async collectionSnapshotObj => { **** same above callback function code)    
-
+    componentDidMount() {
        
-}//compnt did mount end
+    this.props.fetchShopDataFromFirebaseAsyncAction();
+       
+}
 
 
 
@@ -84,7 +51,7 @@ this.setState({ loading: false });
 
 render() {
 
-    const { match } = this.props;
+    const { match, loading } = this.props;
 
 
         return (
@@ -98,10 +65,10 @@ render() {
                 }
 
                 <Route path={`${match.path}/:collectionId`} render={ props => (
-                    <CategoryPageWithSpinner isLoading={this.state.loading} {...props} />)
+                    <CategoryPageWithSpinner isLoading={loading} {...props} />)
                 } /> 
                 
-                <Route exact path={`${match.path}`} render={props => this.state.loading ?
+                <Route exact path={`${match.path}`} render={() => loading ?
                     (<SpinnerOverlay>
                         <SpinnerContainer />
                     </SpinnerOverlay>):
@@ -140,16 +107,15 @@ render() {
 
 
 const mapDispatchToProps = (dispatch) => ({
-    
-shopDataFromFirebaseToReducerAction: (singleObjectCollection) => {
-        
-    dispatch(shopDataFromFirebaseToReducerAction(singleObjectCollection))
-    }
-
-
+    fetchShopDataFromFirebaseAsyncAction: () => dispatch(fetchShopDataFromFirebaseAsyncAction())
 });
 
 
 
+const mapStateToProps = (state) => ({
+    loading: selectIsLoadingSelector(state)
+})
 
-export default connect(null, mapDispatchToProps)(ShopPage2);
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShopPage2);
