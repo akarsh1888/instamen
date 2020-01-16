@@ -2,8 +2,8 @@ import React from 'react';
 
 //Link Router Functionality
 import { Link } from "react-router-dom";
-
 //SVG LOGO
+// eslint-disable-next-line
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 
 // Styles
@@ -30,42 +30,68 @@ import {selectCartHiddenSelector} from "../../redux/cart/cart.selectors.js"
 // CurrentUser Selector
 import { selectCurrentUserSelector } from '../../redux/user/user.selectors'
     
-const Header = ({currentUser, hidden}) => {
-    return (
-            
-        <nav id='main-nav' >
-               
-                    <Link to="/">
-                        <Logo className="logo" />
-                    </Link>
+const Header = ({ currentUser, hidden, propforvh }) => {
+  console.log(propforvh)
+  return (
+    <header className={`${propforvh ? 'prop' : ''}`} >
+      <div className="container">
+        <nav id="main-nav">
+          <Link to="/">
+            {
+              // <Logo className="logo" />
+            }{" "}
+            <h1 class="brand">
+              Insta<span>Shop</span>
+            </h1>
+          </Link>
 
-                    <ul> 
-                    
-                        <li><Link className='Current Link' to="/">HOME</Link></li>
-                        <li><Link className='Link'  to="/shop">SHOP</Link></li>
-                        <li><Link className='Link' to="/">ABOUT</Link></li>
-                        {
-                        currentUser ?
-                        <li><Link className='Link' onClick={() => auth.signOut()}> SIGN OUT</Link> </li>
-                            :
-                        <li><Link className='Link' to='/signin'>SIGN IN</Link></li>
-                        }
+          <ul>
+            <li>
+              <Link className="Current Link" to="/">
+                HOME
+              </Link>
+            </li>
+            <li>
+              <Link className="Link" to="/shop">
+                SHOP
+              </Link>
+            </li>
+            <li>
+              <Link className="Link" to="/">
+                ABOUT
+              </Link>
+            </li>
+            {currentUser ? (
+              <li>
+                <Link className="Link" onClick={() => auth.signOut()}>
+                  {" "}
+                  SIGN OUT
+                </Link>{" "}
+              </li>
+            ) : (
+              <li>
+                <Link className="Link" to="/signin">
+                  SIGN IN
+                </Link>
+              </li>
+            )}
 
-                        <li><Link className='Link' to="/">CONTACT</Link></li>
-                        
-                        <li><CartIcon /></li> 
-                        <li> { hidden ? null : <CartDropDown /> } </li>
-                    </ul>
-           
+            <li>
+              <Link className="Link" to="/">
+                CONTACT
+              </Link>
+            </li>
+
+            <li className="gandu">
+              <CartIcon />
+            </li>
+
+            <div> {hidden ? null : <CartDropDown />} </div>
+          </ul>
         </nav>
-
-        
-        
-            
-
-
-
-    );
+      </div>
+    </header>
+  );
 };
 
 

@@ -9,7 +9,9 @@ import "./App.css";
 import HomePage from "./pages/homepage/homepage.component";
 import SignInSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 import Footer from "./components/footer/footer.component";
+// eslint-disable-next-line
 import Header from './components/header/header.component';
+// eslint-disable-next-line
 import Showcase from './components/showcase/showcase.component';
 //import ShopPage from "./pages/shop/shop.component";
 import ShopPage2 from "./pages/shop2/shop2.component";
@@ -117,9 +119,9 @@ class App extends React.Component {
     return (
       <div>
   
-        <Header />
-
-        <Route exact path="/" component={Showcase} />
+        {
+          // <Route exact path="/" component={Showcase} />
+        }
         
 
         <Switch>

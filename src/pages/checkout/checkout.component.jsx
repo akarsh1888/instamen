@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 
 // Component
 import CheckoutItem from '../../components/checkout-items/checkout-item.component';
-
+import Header from '../../components/header/header.component';
 // Selectors for cartItemsArray & cartTotal
 import { selectCartItemsArraySelector, selectCartTotalPriceSelector } from '../../redux/cart/cart.selectors';
 
@@ -20,40 +20,43 @@ import { selectCartItemsArraySelector, selectCartTotalPriceSelector } from '../.
 
 const CheckoutPage = ({ cartItemsArray, cartItemsArrayTotalPrice}) => (
     
-    <div className='checkout-page'>
+    <div>
+        <Header/>
+        <div className='checkout-page'>
         
         <div className='checkout-header'>
-                <div className='header-block'>
+        <div className='header-block'>
                     <span>Product</span>
                 </div>
                 <div className='header-block'>
                     <span>Description</span>
-                </div>
+                    </div>
                 <div className='header-block'>
                     <span>Quantity</span>
                 </div>
                 <div className='header-block'>
-                    <span>Price</span>
+                <span>Price</span>
                 </div>
                 <div className='header-block'>
                     <span>Remove</span>
                 </div>
-        </div>
+                </div>
         {
             cartItemsArray.map(cartItem => (
                 <CheckoutItem key={cartItem.id} cartItem={cartItem}/>
             ))
         };
-                
-          
+        
+        
         
         <div className='total'>TOTAL: ${cartItemsArrayTotalPrice}</div>
     </div>
-);
+</div>
+    );
+    
     
 
-
-
+    
 
 
 
