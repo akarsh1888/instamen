@@ -1,0 +1,218 @@
+.site-content {
+  display: grid;
+  grid-template-columns: 70% 30%;
+  grid-gap: 1rem;
+
+
+  .posts{
+
+  .post-content > .post-image,
+  .post-title {
+    padding: 1rem 2rem;
+    position: relative;
+  }
+
+
+  .post-content {
+      margin-bottom: 3rem;
+      hr{
+        width: 96%;
+      }
+
+    .post-image {
+    //   border: 1px solid black;
+
+      div {
+        overflow: hidden;
+      }
+
+      .img {
+        width: 100%;
+        transition: all 1s ease;
+        &:hover {
+          transform: scale(1.3);
+        }
+      }
+
+      .post-info {
+        background: orange;
+        padding: 1rem;
+        position: absolute;
+        bottom: 0%;
+        left: 20vw;
+        border-radius: 3rem;
+
+        span {
+          margin: 0.3rem;
+        }
+      }
+    }
+
+    .post-title {
+
+        a{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 1.5rem;
+        }
+
+        .btn{
+        border-radius: 0;
+        padding: .7rem 1.5rem;
+        // background: var(--sky);
+        }
+    }
+
+  }
+
+  
+  .pagination{
+    justify-content: center;
+    // color: var(--text-gray);
+    margin: 4rem 0;
+
+    a{
+    padding: .6rem .9rem;
+    border-radius: 2rem;
+    margin: 0 .3rem;
+    font-family: var(--Lexend);
+
+    &:hover{
+        cursor: pointer;
+    }
+    }
+
+    .pages{
+        background-color: black;
+        color: white;
+    }
+}
+
+} 
+
+
+
+
+
+
+//---------Aside Bar--------
+
+.sidebar{
+  .category{
+
+    .category-list{
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+
+      .list-items{
+    background: teal;
+    padding: .4rem 1rem;
+    margin: .8rem 0;
+    border-radius: 3rem;
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+
+    a{
+      color: black;
+    }
+      }
+    }
+  }
+
+
+
+
+
+  .popular-post{
+
+    h2{
+      margin-top: 9rem;
+    }
+
+    .post-content{
+      padding: 1rem 0;
+
+
+
+      .post-image{
+        position: relative;
+
+        div {
+        overflow: hidden;
+
+        .img {
+          width: 100%;
+          transition: all 1s ease;
+
+          &:hover {
+            transform: scale(1.3);
+          }
+        }
+      }
+        
+        .post-info{
+        position: absolute;
+        padding: .4rem .1rem !important;
+        bottom: 0rem !important;
+        left: 0rem !important;
+        border-radius: 0rem !important;
+        background: royalblue !important;
+  
+                span {
+                  margin: 0.3rem;
+                }
+        }
+      }
+
+
+
+      .post-title{
+        margin-top: 1rem;
+
+        a{
+          font-size: 1.2rem;
+          font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande';
+        }
+
+
+      }
+    }
+
+
+
+    .popular-tags{
+       padding: 5rem 0;
+
+       .tags{
+
+        .tag{
+          background: salmon;
+          padding: .4rem 1rem;
+          border-radius: 3rem;
+          margin: .4rem .6rem;
+
+        }
+       }
+    }
+
+  }
+
+
+}
+
+
+
+
+
+
+}
+
+
+
+
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}

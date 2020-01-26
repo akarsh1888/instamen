@@ -3,6 +3,7 @@ import './category-overview.styles.scss';
 
 import { connect } from 'react-redux';
 
+import { Link } from "react-router-dom";
 import CollectionPreview from "../collection-preview/collection-preview.component";
 
 // selectShopCollectionsSelector
@@ -24,7 +25,14 @@ const CategoryOverview = ({ collections }) => {
     
     return (
         <div>
-        <Header/>
+            <Header showcase='categoryoverviewshowcase'
+            title="luxurious rooms"
+            subtitle="deluxe rooms starting at $299"
+             >
+            <Link to="/" className="btn">
+             our rooms
+            </Link>
+            </Header>
         <div className="category-overview">
         {
             values ? values.map(({ id, ...otherCollectionProps }) => (

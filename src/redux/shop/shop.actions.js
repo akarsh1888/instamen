@@ -41,6 +41,7 @@ export const fetchShopDataFromFirebaseAsyncAction = () => {
         .get()
         .then(collectionSnapshotObj => {
             const singleObjectCollection = fetchConvertFirebaseShopDataIntoSingleObjectPattern(collectionSnapshotObj);
+            
                 
             dispatch(fetchShopDataFromFirebaseSuccess(singleObjectCollection));
             })

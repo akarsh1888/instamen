@@ -10,15 +10,25 @@ import DirectoryMenu from '../../components/directory-menu/directory-menu.compon
 
 import Header from "../../components/header/header.component";
 
-
+import { Link } from 'react-router-dom';
 
 const HomePage = () => {
   return (
     <div>
-      <Header propforvh={100}/>
-    <HomePageStyledContainer>
-    <DirectoryMenu/>
-    </HomePageStyledContainer>
+      <Header
+        propforvh={true}
+        showcase="homepageshowcase"
+        title="luxurious rooms"
+        subtitle="deluxe rooms starting at $299"
+      >
+          <Link to="/" className="btn">
+            our rooms
+          </Link>
+      </Header>
+
+      <HomePageStyledContainer>
+        <DirectoryMenu />
+      </HomePageStyledContainer>
     </div>
   );
 };

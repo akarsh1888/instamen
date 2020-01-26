@@ -21,9 +21,9 @@ import { selectCartItemsQuantityCount } from "../../redux/cart/cart.selectors";
 
 
 const CartIcon = ({ toggleCartHiddenActionFunction, quantityCountSelector }) => (
-
+    
     <div className='cart-icon' onClick={toggleCartHiddenActionFunction}>
-        <ShoppingIcon className='shopping-icon' />
+    <ShoppingIcon className='shopping-icon' />
         <span className='item-count'>{quantityCountSelector}</span>
     </div>
 

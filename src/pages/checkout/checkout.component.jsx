@@ -6,6 +6,8 @@ import './checkout.styles.scss';
 // Connect to central store
 import { connect } from 'react-redux';
 
+import { Link } from 'react-router-dom';
+
 //import { createStructuredSelector } from 'reselect';
 
 // Component
@@ -21,7 +23,14 @@ import { selectCartItemsArraySelector, selectCartTotalPriceSelector } from '../.
 const CheckoutPage = ({ cartItemsArray, cartItemsArrayTotalPrice}) => (
     
     <div>
-        <Header/>
+        <Header showcase='checkoutpageshowcase'
+        title="luxurious rooms"
+        subtitle="deluxe rooms starting at $299"
+      >
+          <Link to="/" className="btn">
+            our rooms
+          </Link>
+        </Header>
         <div className='checkout-page'>
         
         <div className='checkout-header'>

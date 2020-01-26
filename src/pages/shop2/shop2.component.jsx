@@ -20,6 +20,7 @@ import { SpinnerContainer, SpinnerOverlay } from '../../components/with-spinner/
 
 
 const CategoryPageWithSpinner = WithSpinner(CategoryPage);
+
 //const CategoryOverviewWithSpinner = WithSpinner(CategoryOverview);
 
 
@@ -33,7 +34,7 @@ class ShopPage2 extends React.Component {
 
     componentDidMount() {
        
-    this.props.fetchShopDataFromFirebaseAsyncAction();
+    // this.props.fetchShopDataFromFirebaseAsyncAction();
        
 }
 
@@ -51,11 +52,11 @@ class ShopPage2 extends React.Component {
 
 
 render() {
-
+    
     const { match, loading } = this.props;
-
-
-        return (
+    
+    
+    return (
             <div className='shop-page'>
                 
                 {
@@ -64,11 +65,11 @@ render() {
 //render method takes a functions which takes [props] for the component in the parameter,to be used by cmpnt
 // here we have to pass [match,location] object for the [categorypage] component to fetch from url
                 }
-
+                    
                 <Route path={`${match.path}/:collectionId`} render={ props => (
-                    <CategoryPageWithSpinner isLoading={loading} {...props} />)
-                } /> 
-                
+                        <CategoryPageWithSpinner isLoading={loading} {...props} />)
+                } />
+
                 <Route exact path={`${match.path}`} render={() => loading ?
                     (<SpinnerOverlay>
                         <SpinnerContainer />

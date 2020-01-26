@@ -1,11 +1,32 @@
 .main-footer {
-  background: var(--dark-color);
+  // background: var(--dark-color);
+background-image: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
   color: #fff;
 
   .footer-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 1.5rem;
+
+    div:nth-child(2){
+      .btn{
+        font-weight: bold;
+        font-size: 15px;
+      }
+    }
+
+    div:nth-child(4){
+      .btn{
+        font-weight: bold;
+        font-size: 16px;
+      }
+    }
+
+    div{
+        background: #444;
+        padding: 1rem;
+        border-radius: 2rem;
+    }
 
     .logo {
       width: 200px;
@@ -21,11 +42,13 @@
       width: 90%;
     }
 
-    .ulheading {
-      padding-left: 35px;
+    .sitelinks{
+      background: #444;
+      text-align: center;
+
     }
-
-
+    
+  
     
     .ullist li {
       padding: 0.3rem 0;
@@ -44,12 +67,37 @@
 
 
 
+    .secondlast-child {
+      background: #444;
+      grid-column: 1 / span 4;
+      padding: 0.5rem;
+      text-align: center;
+      font-size: 1.25rem;
+      display: flex;
+      justify-content: center;
+
+      i{
+        margin-right: 3rem;
+        padding: 0.75rem;
+        border-radius: 50%;
+        border: 1px solid #fff;
+
+        &:hover{
+          background-color: var(--secondary-color);
+          cursor: pointer;
+          color: #333;
+        }
+      }
+
+
+    }
+
     .last-child {
       background: #444;
       grid-column: 1 / span 4;
       padding: 0.5rem;
       text-align: center;
-      font-size: 0.75rem;
+      font-size: 1rem;
     }
 
 

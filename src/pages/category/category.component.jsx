@@ -8,28 +8,40 @@ import { selectParticularCollectionSelector } from '../../redux/shop/shop.select
 
 import Header from "../../components/header/header.component";
 
+import { SpinnerContainer, SpinnerOverlay } from '../../components/with-spinner/with-spinner.styles';
+
 
 
 const CategoryPage = ({ particularCollection}) => {
+ 
+   //const { title, items } = particularCollection
 
-    const { title, items } = particularCollection;
+   if(particularCollection){
+       return (
+         <div>
+           <Header />
+           <div className="category-page">
+             <h2 className="title">{particularCollection.title}</h2>
 
+             <div className="items">
+               {particularCollection.items.map(item => (
+                 <CollectionItem key={item.id} item={item} />
+               ))}
+             </div>
+           </div>
+         </div>
+       );
 
-    return (
-        <div>
-            <Header/>
-            <div className='category-page'> 
-            <h2 className='title'>{title}</h2>
-            
-            <div className='items'>
-            {items.map(item => (
-                <CollectionItem key={item.id} item={item} />
-                ))}
-                </div>
-                
-                </div>
+   }
+    else {
+       return (<div>
+        <SpinnerOverlay>
+        <SpinnerContainer />
+        </SpinnerOverlay>
         </div>
-    );
+       );
+        }
+
 };
 
 
@@ -40,6 +52,7 @@ const CategoryPage = ({ particularCollection}) => {
 // based on the match object, it takes the data from url and fetches from the root reducer state
 const mapStateToProps = (state, ownProps) => ({
     particularCollection: selectParticularCollectionSelector(ownProps.match.params.collectionId)(state)
+    
 });
 
 

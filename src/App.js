@@ -1,9 +1,10 @@
+
 import React from "react";
 // Routing
 import { Switch, Route, Redirect } from "react-router-dom";
 
 // Styling
-import "./App.css";
+import "./App.scss";
 
 // COMPONENTS
 import HomePage from "./pages/homepage/homepage.component";
@@ -33,6 +34,9 @@ import { connect } from 'react-redux';
 // user-reducer action object
 import { setCurrentUser } from "./redux/user/user.actions";
 
+// action function
+import { fetchShopDataFromFirebaseAsyncAction } from "./redux/shop/shop.actions";
+
 // structured selector
 import { createStructuredSelector} from "reselect";
 
@@ -45,6 +49,13 @@ import { selectCollectionsAsArrayOfValuesSelector } from "./redux/shop/shop.sele
 // CheckoutPage
 import CheckoutPage from "./pages/checkout/checkout.component";
 
+// BlogPost
+import BlogPost from "./components/blog-post/blog-post.component";
+
+// Error Page
+import ErrorPage from './pages/errorpage/errorpage.component';
+
+import FeaturedItems from "./components/featured-items/featured-items.component";
 
 
 
@@ -61,6 +72,14 @@ class App extends React.Component {
 
   componentDidMount() {
 
+    //now first time app loades it fetches shop data , not the shop component itself
+    this.props.fetchShopDataFromFirebaseAsyncAction();
+
+
+
+
+
+    
     const { setCurrentUserActionFunction } = this.props;
 
     // OAuth Persistent State gets called & gets [userAuth] object from firebase,
@@ -133,10 +152,16 @@ class App extends React.Component {
           <Route exact path="/signin" render={ () => this.props.currentUser ?
             (<Redirect to='/' />) : (<SignInSignUpPage />)} />
 
-          <Route path="/checkout" component={CheckoutPage} />
-                     
+          <Route exact path="/checkout" component={CheckoutPage} />
+
+          
+          <Route component={ErrorPage} />
+    
         </Switch>
 
+        <FeaturedItems/>
+        
+        <BlogPost/>
         <Footer />
         
       </div>
@@ -159,7 +184,8 @@ class App extends React.Component {
 
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentUserActionFunction: user => dispatch(setCurrentUser(user))
+  setCurrentUserActionFunction: (user) => dispatch(setCurrentUser(user)),
+  fetchShopDataFromFirebaseAsyncAction: () => dispatch(fetchShopDataFromFirebaseAsyncAction())
 });
 
 
