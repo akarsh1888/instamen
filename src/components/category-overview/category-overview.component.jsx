@@ -28,11 +28,13 @@ const CategoryOverview = ({ collections }) => {
             <Header showcase='categoryoverviewshowcase'
             title="luxurious rooms"
             subtitle="deluxe rooms starting at $299"
-             >
+            > 
             <Link to="/" className="btn">
              our rooms
             </Link>
             </Header>
+
+
         <div className="category-overview">
         {
             values ? values.map(({ id, ...otherCollectionProps }) => (
@@ -40,7 +42,8 @@ const CategoryOverview = ({ collections }) => {
                 )) :
                 null
         }
-            </div>
+        </div>
+        
         </div>
         );
  };

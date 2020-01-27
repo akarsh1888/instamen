@@ -24,17 +24,23 @@ const CollectionItem = ({ item, addToCartItemsFunction }) => {
   return (
     <div className="collection-item">
       
-      <div className="image" style={{ backgroundImage: `url(${imageUrl})` }} />
-
-      <div className="collection-footer">
-        <span className="name">{name}</span>
-        <span className="price">{price}</span>
-      </div>
-
-      <CustomButton onClick={() => addToCartItemsFunction(item)} propcolorforaddtocart>
+      <div className='img-container'>
+        <div className="image" style={{ backgroundImage: `url(${imageUrl})` }} />
+        
+        <div className="price-top">
+            <h6>${price}</h6>
+            <p>per piece</p>
+        </div>
+              
+        <CustomButton className="btn item-link"
+        onClick={() => addToCartItemsFunction(item)} propcolorforaddtocart>
         ADD TO CART
-      </CustomButton>
+        </CustomButton>
+      </div>
       
+        <div className="collection-footer">
+        <span className="name">{name}</span>
+        </div>
     </div>
   );
 };

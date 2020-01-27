@@ -9,7 +9,10 @@ import CollectionItem from "../collection-item/collection-item.component";
 const CollectionPreview = ({ title, items }) => {
   return (
     <div className="collection-preview">
-      <h1 className="title">{title.toUpperCase()}</h1>
+      
+      <h1 className="title">
+        {title.toUpperCase()}
+      </h1>
 
       { /*  Earlier we were destructuring all props of one object one by one than passing
       it to the <COLLECTION ITEM> but ,now it wants whole object as a whole
