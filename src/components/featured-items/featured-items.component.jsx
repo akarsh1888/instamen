@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
-
+// eslint-disable-next-line
 import { Link } from 'react-router-dom';
 
 import './featured-items.styles.scss';
@@ -11,7 +11,7 @@ import {
   selectIsLoadingSelector
 } from "../../redux/shop/shop.selectors";
 
-// import CollectionItem from "../collection-item/collection-item.component";
+import CollectionItem from "../collection-item/collection-item.component";
 
 
 class FeaturedItems extends Component {
@@ -32,6 +32,7 @@ class FeaturedItems extends Component {
       return item.items.find(oneitems => oneitems.featured === true);
     });
 
+      console.log(array);
       array = array.filter((item, index) => index < 3);
       
     this.setState({featuredItems:array})
@@ -41,45 +42,26 @@ class FeaturedItems extends Component {
     
     
     render() {
+  
     
         return (
-          <div className='cont'>
-                <h1 className="title">
-                    Featured Products
-                </h1>
-                
-                <div className='feature-products'>
+          <div className="feature">
+            <h1 className="title">Featured Products</h1>
 
-                    {this.state.featuredItems.map(item => {
-
-                        const { name, price, imageUrl } = item;
-                        
-                    return (
-                    <article key={item.id} className="item">
-                            
-                      <div className="img-container">
-                        <img src={imageUrl} alt="single product" />
-                                
-                        <div className="price-top">
-                          <h6>${price}</h6>
-                          <p>per piece</p>
-                        </div>
-                            
-                        <Link to='/' className="btn item-link">
-                          Know More
-                        </Link>
-                        <Link to='/' className="btn item-link2">
-                          Add to Cart
-                        </Link>
-                      </div>
-                            
-                        <p className="item-info">{name}</p>
-                    </article>
-                          )
-                })}
-                    
-                </div>
+            <div className="feature-products">
+            {  
+            //  <>
+              //   if(!this.props.isLoading){
                 
+                 this.state.featuredItems.map(item => (
+                    <CollectionItem key={item.id} item={item} />
+                  ))     
+                //  }
+            // </>
+
+                }
+
+            </div>
           </div>
         );
     }

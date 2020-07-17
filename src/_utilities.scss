@@ -1,3 +1,21 @@
+/////* variables */
+:root {
+  --primary-color: #ff677d;
+  --secondary-color: #f39237;
+  --dark-color: #333;
+
+  --light-color: linear-gradient(to right,#d17760 25%, #5db2f8 100%);
+
+  --linear-1st:#f39237;  --linear-2nd:#f39237;
+  
+  --max-width: 1280px;
+}
+
+
+
+
+
+
 /* Utility Classes */
 .container {
   max-width: var(--max-width);
@@ -10,24 +28,24 @@
 .btn{
   display: inline-block;
   color: #fff;
-  background-image: linear-gradient(to right, #c76767 0%, #fe9540 100%);
-  padding: 0.5rem 2rem;
+  background-image: linear-gradient(to right, var(--linear-1st) 0%, var(--linear-2nd) 100%);
+  padding: 6px 12px;
   border: none;
-  border-radius: 2rem;
-  
+  border-radius: 20px; 
 }
 
-
-.btn-light { background: var(--light-color) }
-.btn-primary { background: var(--primary-color) }
-.btn-secondary { background: var(--secondary-color) }
 
 .btn:hover {
   opacity: 0.9;
   background: var(--light-color);
-  color: #333;
+  color: #fff;
   cursor: pointer;
 }
+
+// .btn-light { background: var(--light-color) }
+// .btn-primary { background: var(--primary-color) }
+// .btn-secondary { background: var(--secondary-color) }
+
 
 
 
@@ -49,9 +67,6 @@
 .l-heading {
   font-size: 3rem;
 }
-
-
-
 
 
 

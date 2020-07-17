@@ -226,7 +226,7 @@ header{
       div{
         height: 3px;
         width: 100%;
-        background:#ffa908;
+        background:var(--secondary-color);
         display: block;
         margin-bottom: 1.5rem;
        }
@@ -237,7 +237,7 @@ header{
       height: 40px;
       border-radius: 60%;
       cursor: pointer;
-      background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);
+      background-image: linear-gradient(to right, var(--linear-1st) 0%, var(--linear-2nd) 100%);
     }
 
 

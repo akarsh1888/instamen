@@ -1,8 +1,6 @@
 import React from "react";
-
 // Styles
 import "./homepage.component.styles.scss";
-
 // CSS in JS
 import { HomePageStyledContainer } from "./homepage.styled";
 

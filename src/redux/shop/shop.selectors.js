@@ -25,6 +25,11 @@ export const selectParticularCollectionSelector = (collectionUrlParam) => create
         collections =>
             // collections.find( collection => collection.id === COLLECTION_ID_MAP[collectionUrlParam] ) 
             (collections ? collections[collectionUrlParam] : null)
+);
+    
+export const selectParticularProductSelector = (collectionId, product) => createSelector(
+        [selectShopCollectionsSelector],
+    collections => collections[collectionId].items.find(item => item.name === product)        
     );
 
 

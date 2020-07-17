@@ -28,7 +28,7 @@ export const fetchShopDataFromFirebaseAsyncAction = () => {
     return (dispatch) => {
 
     // get collectionreference object
-    const collectionRefObject = firestore.collection('collection');
+    const collectionRefObject = firestore.collection('collectionnew');
 
     // dispatch(fetchShopDataFromFirebaseStart());
  

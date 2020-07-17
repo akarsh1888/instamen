@@ -26,7 +26,8 @@ import { auth } from "./firebase/firebase.utils";
 import { checkingOrCreatingUserDataInDb } from './firebase/firebase.utils';
 
 // for one time usage, function for storing shopdata into firebase nosql db
-//import { addCollectionAndDocuments }  from "./firebase/firebase.utils";
+// eslint-disable-next-line
+import { addCollectionAndDocuments }  from "./firebase/firebase.utils";
 
 //redux
 import { connect } from 'react-redux';
@@ -109,7 +110,7 @@ class App extends React.Component {
       }
 
       //-----calling this function one time which will store our shop data in firebase nosql db without manually
-      // addCollectionAndDocuments('collection', collectionsAsArray.map( 
+      //  addCollectionAndDocuments('collectionnew', collectionsAsArray.map( 
       // ({ title, items }) => ({ title, items })  ));
 
     });
@@ -159,9 +160,11 @@ class App extends React.Component {
     
         </Switch>
 
-        <FeaturedItems/>
-        
-        <BlogPost/>
+        {
+           <FeaturedItems />
+           
+           // <BlogPost/>
+        }
         <Footer />
         
       </div>

@@ -4,22 +4,31 @@ import './category.styles.scss';
 import { connect } from "react-redux";
 import CollectionItem from "../../components/collection-item/collection-item.component";
 
+import ProductPage from "../../components/product-page/product-page.component";
+
 import { selectParticularCollectionSelector } from '../../redux/shop/shop.selectors';
 
 import Header from "../../components/header/header.component";
 
+ // eslint-disable-next-line
 import { SpinnerContainer, SpinnerOverlay } from '../../components/with-spinner/with-spinner.styles';
 
+import { Route } from "react-router-dom";
 
 
-const CategoryPage = ({ particularCollection}) => {
+
+const CategoryPage = ({ particularCollection, match }) => {
  
    //const { title, items } = particularCollection
 
-   if(particularCollection){
+  // if (particularCollection) {
+     
        return (
          <div>
-           <Header />
+           
+            <Route exact path={`${match.path}`} render={ props => (
+            <div>
+             <Header />
            <div className="category-page">
              <h2 className="title">{particularCollection.title}</h2>
 
@@ -28,19 +37,25 @@ const CategoryPage = ({ particularCollection}) => {
                  <CollectionItem key={item.id} item={item} />
                ))}
              </div>
-           </div>
+               </div>
+           </div> )
+                   } />
+   
+   
+            <Route path={`${match.path}/:product`} render={ props => (<ProductPage {...props} />) } />
          </div>
        );
 
-   }
-    else {
-       return (<div>
-        <SpinnerOverlay>
-        <SpinnerContainer />
-        </SpinnerOverlay>
-        </div>
-       );
-        }
+  //  }
+    // else {
+    //    return (<div>
+    //     <SpinnerOverlay>
+    //        <SpinnerContainer />
+    //        <h2>Wait! Loading Things For You</h2>
+    //     </SpinnerOverlay>
+    //     </div>
+    //    );
+    //     }
 
 };
 
@@ -51,7 +66,7 @@ const CategoryPage = ({ particularCollection}) => {
 
 // based on the match object, it takes the data from url and fetches from the root reducer state
 const mapStateToProps = (state, ownProps) => ({
-    particularCollection: selectParticularCollectionSelector(ownProps.match.params.collectionId)(state)
+  particularCollection: selectParticularCollectionSelector(ownProps.match.params.collectionId)(state)
     
 });
 

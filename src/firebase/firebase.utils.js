@@ -152,8 +152,8 @@ export const checkingOrCreatingUserDataInDb = async (userAuth, additionalData) =
 
   
 
-/*
 
+/*
 //---- for one time usage, function for storing shopdata into firebase nosql db
  //----  For storing shop data into firebase nosql db without manually typing
 

@@ -11,15 +11,19 @@ import { connect } from 'react-redux';
 
 // cart-reducer action function
 import { addToCartItemsActionFunction } from "../../redux/cart/cart.actions"; 
+ 
+// eslint-disable-next-line
+import { Redirect } from "react-router-dom";
+
+import { withRouter } from "react-router-dom";
 
 
 
 
 
-
-const CollectionItem = ({ item, addToCartItemsFunction }) => {
+const CollectionItem = ({ item, addToCartItemsFunction, history, match }) => {
    
-  const { name, price, imageUrl } = item;
+  const { name, price, imageUrl,category } = item;
   
   return (
     <div className="collection-item">
@@ -32,10 +36,15 @@ const CollectionItem = ({ item, addToCartItemsFunction }) => {
             <p>per piece</p>
         </div>
               
-        <CustomButton className="btn item-link"
+        <CustomButton
         onClick={() => addToCartItemsFunction(item)} propcolorforaddtocart>
         ADD TO CART
         </CustomButton>
+
+        <button className='know-more' onClick={() => history.push(`/shop/${category}/${name}`)}>
+          <span>KNOW MORE</span>
+        </button>
+
       </div>
       
         <div className="collection-footer">
@@ -57,4 +66,4 @@ const mapDispatchToProps = dispatch => ({
 
 
 
-export default connect(null, mapDispatchToProps)(CollectionItem);
+export default withRouter(connect(null, mapDispatchToProps)(CollectionItem));
