@@ -7,9 +7,8 @@
   position: relative;
   box-shadow: 12px 10px 15px 1px rgba(0, 0, 0, 0.5);
   transition: all 0.3s ease-in-out;
- 
-  .img-container {
 
+  .img-container {
     .image {
       display: block;
       height: 300px;
@@ -43,42 +42,39 @@
     //Inside Custom Button component,there is a button with class [custom-button] ,
     // on hovering ,addtocart button appears
 
-       .custom-button{
-         position: absolute;
-         top: 25%;
-         left: 25%;
-         display: none;
-         background-image: linear-gradient(to right, #c76767 0%, #fe9540 100%);
-         border: none;
-         border-radius: 2rem;
-         transition: all 0.3s ease-in-out;
+    .custom-button {
+      position: absolute;
+      top: 25%;
+      left: 25%;
+      display: none;
+      background-image: linear-gradient(to right, #c76767 0%, #fe9540 100%);
+      border: none;
+      border-radius: 2rem;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .know-more {
+      cursor: pointer;
+      color: #333;
+      position: absolute;
+      top: 50%;
+      left: 32%;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 1rem;
+      display: none;
+      background-image: linear-gradient(to right, #c76767 0%, #fe9540 100%);
+      border: none;
+      border-radius: 2rem;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        span {
+          color: #fff;
         }
-
-        .know-more{
-         cursor: pointer;
-         color: #333;
-         position: absolute;
-         top: 50%;
-         left: 32%;
-         font-size: 13px;
-         font-weight: 700;
-         padding: 1rem;
-         display: none;
-         background-image: linear-gradient(to right, #c76767 0%, #fe9540 100%);
-         border: none;
-         border-radius: 2rem;
-         transition: all 0.3s ease-in-out;
-
-         &:hover{
-           span{
-             color: #fff;
-           }
-         }
-        }
-
-
+      }
+    }
   }
-
 
   .collection-footer {
     background: #cfcfcf;
@@ -90,12 +86,7 @@
     letter-spacing: 3px;
   }
 
-
-
-
-
-
-   &:hover {
+  &:hover {
     box-shadow: 4px 10px 5px 0px rgba(0, 0, 0, 0.5);
     cursor: pointer;
 
@@ -105,17 +96,15 @@
     .price-top {
       opacity: 0;
     }
- 
-      .custom-button{
-        z-index: 2;
-        display: flex;
-       }
 
-      .know-more{
-        z-index: 2;
-        display: inline-block;
-       }
+    .custom-button {
+      z-index: 2;
+      display: flex;
+    }
 
-
+    .know-more {
+      z-index: 2;
+      display: inline-block;
+    }
   }
 }

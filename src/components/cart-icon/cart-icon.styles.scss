@@ -7,7 +7,11 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  background-image: linear-gradient(to right, var(--linear-1st) 0%, var(--linear-2nd) 100%);
+  background-image: linear-gradient(
+    to right,
+    var(--linear-1st) 0%,
+    var(--linear-2nd) 100%
+  );
 
   .shopping-icon {
     width: 30px;
@@ -19,5 +23,6 @@
     font-size: 18px;
     font-weight: bold;
     bottom: 4px;
+    color: white;
   }
 }

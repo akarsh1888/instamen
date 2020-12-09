@@ -2,17 +2,16 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 
-
 // API Object
 const config = {
-    apiKey: "AIzaSyAtDxz_MtsRyLmoZLBJNPBwnnq5_SsTcEo",
-    authDomain: "crowndb-db36a.firebaseapp.com",
-    databaseURL: "https://crowndb-db36a.firebaseio.com",
-    projectId: "crowndb-db36a",
-    storageBucket: "crowndb-db36a.appspot.com",
-    messagingSenderId: "612875353103",
-    appId: "1:612875353103:web:9b9f49c42ff89ba695f77a",
-    measurementId: "G-EGPTKQMNTW"
+  apiKey: "AIzaSyAtDxz_MtsRyLmoZLBJNPBwnnq5_SsTcEo",
+  authDomain: "crowndb-db36a.firebaseapp.com",
+  databaseURL: "https://crowndb-db36a.firebaseio.com",
+  projectId: "crowndb-db36a",
+  storageBucket: "crowndb-db36a.appspot.com",
+  messagingSenderId: "612875353103",
+  appId: "1:612875353103:web:9b9f49c42ff89ba695f77a",
+  measurementId: "G-EGPTKQMNTW",
 };
 
 // Base imports libraries which we want
@@ -20,36 +19,11 @@ firebase.initializeApp(config);
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // SignInWithGoogle functionality function
 const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({ prompt: "select_account" });
+
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*
 ----Returning Object are:
@@ -78,17 +52,15 @@ documents as [documentSnapshot] objects.
 
 */
 
+export const checkingOrCreatingUserDataInDb = async (
+  userAuth,
+  additionalData
+) => {
+  //if userAuth object is null ,just return & do nothing
+  if (!userAuth) {
+    return;
+  }
 
-export const checkingOrCreatingUserDataInDb = async (userAuth, additionalData) => {
-
-    //if userAuth object is null ,just return & do nothing
-    if (!userAuth)
-    {
-        return;
-    }
-
-
-  
   // Practice code for collections
   /*
   const collectionRef = firestore.collection('users');
@@ -98,60 +70,36 @@ export const checkingOrCreatingUserDataInDb = async (userAuth, additionalData) =
   console.log(   { collection: collectionSnapshot.docs.map( docSnapshot => docSnapshot.data()) }    );
      
   */
-  
 
-  
-    //checking whether the user with that [uid] exist in db or not
-    // this line below, return a [documentref] object, because we r searching for a document
-    const userRefObject = firestore.doc(`users/${userAuth.uid}`);
+  //checking whether the user with that [uid] exist in db or not
+  // this line below, return a [documentref] object, because we r searching for a document
+  const userRefObject = firestore.doc(`users/${userAuth.uid}`);
 
-    //from documntref we get snapshot object,it represents data only, but has 
-    //..[exist] property which tells whether exist in db or not
-    const snapShot = await userRefObject.get();
+  //from documntref we get snapshot object,it represents data only, but has
+  //..[exist] property which tells whether exist in db or not
+  const snapShot = await userRefObject.get();
 
-    //hence if not in db then create in db/store in db
-    if (!snapShot.exists)
-    {
-        //what things we will be creating, we destructure from [userAuth] object
-        const { displayName, email } = userAuth;
-        const createdAt = new Date();
-    try
-    {// asking to create a document in db with these details
-    await userRefObject.set({ displayName, email, createdAt, ...additionalData });
+  //hence if not in db then create in db/store in db
+  if (!snapShot.exists) {
+    //what things we will be creating, we destructure from [userAuth] object
+    const { displayName, email } = userAuth;
+    const createdAt = new Date();
+    try {
+      // asking to create a document in db with these details
+      await userRefObject.set({
+        displayName,
+        email,
+        createdAt,
+        ...additionalData,
+      });
+    } catch (error) {
+      console.log("error creating user", error.message);
     }
-      
-    catch (error)
-    {  console.log("error creating user", error.message);  }
-        
-    }
+  }
 
-    
-
-//It will return userrefObject[documentref] object always
+  //It will return userrefObject[documentref] object always
   return userRefObject;
-  };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-  
-
+};
 
 /*
 //---- for one time usage, function for storing shopdata into firebase nosql db
@@ -178,61 +126,34 @@ export const addCollectionAndDocuments = async (collectionKey, collectionsAsArra
 
 */
 
-
-
-
-
-
-
-
-
-
-
-
-
 //---shop data from firebase into single objects of objects pattern
-//--fetches each docmnt data + converts all into a single objects of objects with key pattern 
+//--fetches each docmnt data + converts all into a single objects of objects with key pattern
 
-export const fetchConvertFirebaseShopDataIntoSingleObjectPattern = (collectionSnapshotObj) => {
+export const fetchConvertFirebaseShopDataIntoSingleObjectPattern = (
+  collectionSnapshotObj
+) => {
+  const finalCollctnArrayofObjectWithoutKeys = collectionSnapshotObj.docs.map(
+    (documentSnapshotObject) => {
+      const { title, items } = documentSnapshotObject.data();
 
-  
-  const finalCollctnArrayofObjectWithoutKeys = collectionSnapshotObj.docs.map(documentSnapshotObject => {
-    
-    const { title, items } = documentSnapshotObject.data();
+      return {
+        routeName: encodeURI(title.toLowerCase()),
+        id: documentSnapshotObject.id,
+        title,
+        items,
+      };
+    }
+  );
 
-    return {
-      routeName: encodeURI(title.toLowerCase()),
-      id: documentSnapshotObject.id,
-      title,
-      items
-    };
-  });
-  
-  
-//convert it from a single array into a single object
-//return the object of objects with the added [keys] to each object
-  return finalCollctnArrayofObjectWithoutKeys.reduce((accumulator, collection) => {
-    accumulator[collection.title.toLowerCase()] = collection;
-    return accumulator;
-  }, {});
-
-
-
-
+  //convert it from a single array into a single object
+  //return the object of objects with the added [keys] to each object
+  return finalCollctnArrayofObjectWithoutKeys.reduce(
+    (accumulator, collection) => {
+      accumulator[collection.title.toLowerCase()] = collection;
+      return accumulator;
+    },
+    {}
+  );
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
 export default firebase;
-
-

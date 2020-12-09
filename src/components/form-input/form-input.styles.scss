@@ -8,9 +8,6 @@ $main-color: black;
   color: $main-color;
 }
 
-
-
-
 .group {
   position: relative;
   margin: 45px 0;
@@ -37,13 +34,9 @@ $main-color: black;
     }
   }
 
-
-
-  input[type='password'] {
+  input[type="password"] {
     letter-spacing: 0.3em;
   }
-
-  
 
   .form-input-label {
     color: $sub-color;

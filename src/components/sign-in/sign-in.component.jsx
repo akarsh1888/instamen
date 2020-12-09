@@ -1,67 +1,43 @@
 import React, { Component } from "react";
 // Styles
-import './sign-in.styles.scss';
+import "./sign-in.styles.scss";
 
 // Components
-import FormInput from '../form-input/form-input.component';
-import CustomButton from '../custom-button/custom-button.component';
+import FormInput from "../form-input/form-input.component";
+import CustomButton from "../custom-button/custom-button.component";
 
 //Signinwithgoogle function from firebase utils
-import { auth, signInWithGoogle  } from "../../firebase/firebase.utils";
+import { auth, signInWithGoogle } from "../../firebase/firebase.utils";
 
 class SignIn extends Component {
   constructor() {
     super();
 
     this.state = {
-      email: "",
-      password: ""
+      email: " ",
+      password: " ",
     };
   }
 
-    
-    
-    
-    
-    
-  handleSubmit = async event => {
+  handleSubmit = async (event) => {
     event.preventDefault();
     const { email, password } = this.state;
 
-    try
-    {
+    try {
       await auth.signInWithEmailAndPassword(email, password);
-      this.setState({ email: '', password: '' });
-    }
-    catch (error)
-    {
+      this.setState({ email: "", password: "" });
+    } catch (error) {
       console.log(error);
     }
+  };
 
-     };
-
-  
-  
-  
-  
-  
-  
-  
-    
-    handleChange = event => {
+  handleChange = (event) => {
     const { value, name } = event.target;
 
     this.setState({ [name]: value });
   };
 
-  
-    
-    
-    
-    
-    
-    
-    render() {
+  render() {
     return (
       <div className="sign-in">
         <h2>I already have an account</h2>
@@ -85,18 +61,15 @@ class SignIn extends Component {
             required
           />
 
-          <div className='button'>
-          
-          <CustomButton type="submit"> Sign in </CustomButton>
+          <div className="button">
+            <CustomButton type="submit"> Sign in </CustomButton>
 
-          {/* SignInWith Google button*/}
-          <CustomButton onClick={signInWithGoogle} googleSignInColorProp>
-            {" "}
-            Sign in With Google{" "}
-          </CustomButton>
-  
+            {/* SignInWith Google button*/}
+            <CustomButton onClick={signInWithGoogle} googleSignInColorProp>
+              {" "}
+              Sign in With Google{" "}
+            </CustomButton>
           </div>
-
         </form>
       </div>
     );
